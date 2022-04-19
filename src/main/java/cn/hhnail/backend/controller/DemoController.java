@@ -4,7 +4,6 @@ import cn.hhnail.backend.bean.Test;
 import cn.hhnail.backend.mapper.DemoMapper;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,7 +37,7 @@ public class DemoController {
 	}
 
 
-	@ApiOperation(value = "测试GET请求")
+	@ApiOperation(value = "测试mp")
 	@GetMapping("/demoMp")
 	public void demoMp(){
 		System.out.println(("----- selectAll method test ------"));
