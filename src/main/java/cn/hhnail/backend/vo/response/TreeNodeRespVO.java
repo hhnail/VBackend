@@ -25,6 +25,9 @@ public class TreeNodeRespVO {
 	@ApiModelProperty(value = "所处层级")
 	private Integer level;
 
+	@ApiModelProperty(value = "父编码")
+	private Integer pid;
+
 	@ApiModelProperty(value = "子节点")
-	private List<TreeNode> children = new ArrayList<>();
+	private List<TreeNodeRespVO> children = new ArrayList<>();
 }

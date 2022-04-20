@@ -2,6 +2,8 @@ package cn.hhnail.backend.controller;
 
 import cn.hhnail.backend.bean.TreeNode;
 import cn.hhnail.backend.service.TreeNodeService;
+import cn.hhnail.backend.util.TreeNodeUtil;
+import cn.hhnail.backend.vo.response.TreeNodeRespVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,12 +20,11 @@ public class TreeNodeController {
 
 
 	@PostMapping(value = "/getApiGroupTree")
-	public List<TreeNode> getApiGroupTree() {
-
+	public List<TreeNodeRespVO> getApiGroupTree() {
 		List<TreeNode> list = treeNodeService.getApiGroupTree();
-
-
-		return list;
+		List<TreeNodeRespVO> treeNodeRespVOS = TreeNodeUtil.parseDTO2VO(list);
+		List<TreeNodeRespVO> responseVOs = TreeNodeUtil.buildVOTree(treeNodeRespVOS);
+		return responseVOs;
 	}
 
 
