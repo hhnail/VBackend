@@ -1,7 +1,7 @@
-package cn.hhnail.backend.bean;
+package cn.hhnail.backend.vo.response;
 
+import cn.hhnail.backend.bean.TreeNode;
 import com.baomidou.mybatisplus.annotation.TableField;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -9,19 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class TreeNode {
-
+public class TreeNodeRespVO {
 	@ApiModelProperty(value = "唯一编码")
-	private Integer id;
+	private Integer key;
 
 	@ApiModelProperty(value = "名称")
-	private String name;
+	private String title;
 
 	@ApiModelProperty(value = "类型")
 	private String type;
-
-	@ApiModelProperty(value = "逻辑删除标记(0/1)")
-	private Integer deleted;
 
 	@ApiModelProperty(value = "叶子节点标记(0/1)")
 	private Integer leafy;
@@ -29,14 +25,6 @@ public class TreeNode {
 	@ApiModelProperty(value = "所处层级")
 	private Integer level;
 
-	@ApiModelProperty(value = "父编号")
-	private Integer pid;
-
 	@ApiModelProperty(value = "子节点")
-	// 不是数据库字段
-	@TableField(exist = false)
 	private List<TreeNode> children = new ArrayList<>();
-
-
-
 }

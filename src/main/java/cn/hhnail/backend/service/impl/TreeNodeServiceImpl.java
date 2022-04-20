@@ -3,6 +3,7 @@ package cn.hhnail.backend.service.impl;
 import cn.hhnail.backend.bean.TreeNode;
 import cn.hhnail.backend.mapper.TreeNodeMapper;
 import cn.hhnail.backend.service.TreeNodeService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class TreeNodeServiceImpl implements TreeNodeService {
 	@Override
 	public List<TreeNode> getApiGroupTree() {
 
+		QueryWrapper<TreeNode> wrapper = new QueryWrapper<>();
+		wrapper.eq("deleted",0)
+				.orderByDesc("level");
 		List<TreeNode> treeNodes = treeNodeMapper.selectList(null);
 
 		return treeNodes;

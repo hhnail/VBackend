@@ -21,6 +21,8 @@ public class TreeNodeController {
 	public List<TreeNode> getApiGroupTree(){
 
 		List<TreeNode> list = treeNodeService.getApiGroupTree();
+
+
 		return list;
 	}
 
