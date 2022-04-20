@@ -6,7 +6,6 @@ import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TreeNodeUtil {
 
@@ -16,7 +15,7 @@ public class TreeNodeUtil {
 	 * @param nodes
 	 * @return
 	 */
-	public static List<TreeNode> buildTree(List<TreeNode> nodes){
+	public static List<TreeNode> buildTree(List<TreeNode> nodes) {
 		List<TreeNode> tree = null;
 
 
@@ -25,18 +24,18 @@ public class TreeNodeUtil {
 
 	/**
 	 * 将DTO转化为VO
-	 *
+	 * <p>
 	 * id -> key
 	 * name -> title
 	 *
 	 * @param nodes
 	 * @return
 	 */
-	public static List<TreeNodeRespVO> parseDTO2VO(List<TreeNode> nodes){
+	public static List<TreeNodeRespVO> parseDTO2VO(List<TreeNode> nodes) {
 		List<TreeNodeRespVO> voList = new ArrayList<>();
-		nodes.forEach(node->{
+		nodes.forEach(node -> {
 			TreeNodeRespVO vo = new TreeNodeRespVO();
-			BeanUtils.copyProperties(node,vo);
+			BeanUtils.copyProperties(node, vo);
 			vo.setTitle(node.getName());
 			vo.setKey(node.getId());
 			voList.add(vo);

@@ -18,16 +18,13 @@ public class TreeNodeController {
 
 
 	@PostMapping(value = "/getApiGroupTree")
-	public List<TreeNode> getApiGroupTree(){
+	public List<TreeNode> getApiGroupTree() {
 
 		List<TreeNode> list = treeNodeService.getApiGroupTree();
 
 
 		return list;
 	}
-
-
-
 
 
 }

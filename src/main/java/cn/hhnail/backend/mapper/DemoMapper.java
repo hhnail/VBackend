@@ -6,5 +6,4 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface DemoMapper extends BaseMapper<Test> {
 
 
-
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/vapi")
-@Api(value = "测试控制器", tags = { "测试" })
+@Api(value = "测试控制器", tags = {"测试"})
 public class DemoController {
 
 	@Autowired
@@ -30,7 +30,7 @@ public class DemoController {
 
 	@ApiOperation(value = "测试GET请求")
 	@GetMapping("/demoGet")
-	public String demoGet(){
+	public String demoGet() {
 
 		return "demoGet success!";
 
@@ -39,7 +39,7 @@ public class DemoController {
 
 	@ApiOperation(value = "测试mp")
 	@GetMapping("/demoMp")
-	public void demoMp(){
+	public void demoMp() {
 		System.out.println(("----- selectAll method test ------"));
 		List<Test> userList = demoMapper.selectList(null);
 		userList.forEach(System.out::println);
