@@ -27,5 +27,13 @@ public class TreeNodeController {
 		return responseVOs;
 	}
 
+	@PostMapping(value = "/getApiGroupTree2")
+	public List<TreeNodeRespVO> getApiGroupTree2() {
+		List<TreeNode> list = treeNodeService.getApiGroupTree();
+		List<TreeNodeRespVO> treeNodeRespVOS = TreeNodeUtil.parseDTO2VO(list);
+		List<TreeNodeRespVO> responseVOs = TreeNodeUtil.buildAscOrderdVOTree(treeNodeRespVOS);
+		return responseVOs;
+	}
+
 
 }

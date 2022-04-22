@@ -20,7 +20,7 @@ public class TreeNodeServiceImpl implements TreeNodeService {
 
 		QueryWrapper<TreeNode> wrapper = new QueryWrapper<>();
 		wrapper.eq("deleted",0)
-				.orderByDesc("level");
+				.orderByAsc("level");
 		List<TreeNode> treeNodes = treeNodeMapper.selectList(null);
 
 		return treeNodes;
