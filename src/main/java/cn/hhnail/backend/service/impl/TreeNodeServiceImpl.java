@@ -6,6 +6,7 @@ import cn.hhnail.backend.mapper.TreeNodeMapper;
 import cn.hhnail.backend.service.TreeNodeService;
 import cn.hhnail.backend.vo.request.UpdateModuleReqVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -76,9 +77,10 @@ public class TreeNodeServiceImpl implements TreeNodeService {
 
 	@Override
 	public void deleteModule(Integer id) {
-		TreeNode entity = new TreeNode();
-		entity.setId(id);
-		entity.setDeleted(1);
-		treeNodeMapper.updateById(entity);
+		UpdateWrapper uw = new UpdateWrapper();
+		uw.eq("id", id);
+		uw.set("deleted", 1);
+		// 仅更新wrapper提供的字段
+		treeNodeMapper.update(null, uw);
 	}
 }
