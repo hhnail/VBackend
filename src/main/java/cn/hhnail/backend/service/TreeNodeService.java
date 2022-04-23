@@ -8,4 +8,8 @@ public interface TreeNodeService {
 
 
 	List<TreeNode> getApiGroupTree();
+
+	List<TreeNode> getHeaderMenu();
+
+	List<TreeNode> getModule();
 }

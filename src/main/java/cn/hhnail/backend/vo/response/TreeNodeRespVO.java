@@ -1,7 +1,5 @@
 package cn.hhnail.backend.vo.response;
 
-import cn.hhnail.backend.bean.TreeNode;
-import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

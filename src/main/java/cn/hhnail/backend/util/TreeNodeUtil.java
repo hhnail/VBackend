@@ -1,6 +1,8 @@
 package cn.hhnail.backend.util;
 
 import cn.hhnail.backend.bean.TreeNode;
+import cn.hhnail.backend.vo.response.HeaderMenuRespVO;
+import cn.hhnail.backend.vo.response.ModuleRespVO;
 import cn.hhnail.backend.vo.response.TreeNodeRespVO;
 import org.springframework.beans.BeanUtils;
 
@@ -178,4 +180,82 @@ public class TreeNodeUtil {
 		return voList;
 	}
 
+
+	/**
+	 *
+	 */
+	public static List<HeaderMenuRespVO> parseHeaderMenuDTO2VO(List<TreeNode> nodes) {
+		List<HeaderMenuRespVO> voList = new ArrayList<>();
+		nodes.forEach(node -> {
+			HeaderMenuRespVO vo = new HeaderMenuRespVO();
+			BeanUtils.copyProperties(node, vo);
+			vo.setLabel(node.getName());
+			vo.setKey(String.valueOf(node.getId()));
+			voList.add(vo);
+		});
+		return voList;
+	}
+
+
+	/**
+	 * 构建【模块信息】树
+	 */
+	public static List<ModuleRespVO> buildAscOrderdModuleRespVOTree(List<ModuleRespVO> nodes) {
+
+		// 参数校验、异常处理
+		if (nodes == null || nodes.size() < 1) {
+			throw new RuntimeException("节点集合为空");
+		}
+
+		// 从最深的层级开始分组
+		Integer currentLevel = nodes.get(nodes.size() - 1).getLevel();
+
+		if (currentLevel == null || currentLevel < 1) {
+			throw new RuntimeException("节点【所处层级】字段维护有误");
+		}
+
+
+		// 存储每个层级的节点
+		List<List<ModuleRespVO>> nodesByLevel = new ArrayList<>();
+		while (currentLevel > 0) {
+			// 将对应层级的节点分组
+			List<ModuleRespVO> currentLevelNodes = new ArrayList<>();
+			for (int i = 0; i < nodes.size(); i++) {
+				ModuleRespVO current = nodes.get(i);
+				if (currentLevel == current.getLevel()) {
+					// 将节点添加到某个分组
+					currentLevelNodes.add(current);
+				}
+			}
+			// 存储按所处层级分组后的节点
+			nodesByLevel.add(currentLevelNodes);
+			currentLevel--;
+		}
+
+		// 构建树节点
+		for (int i = 0; i < nodesByLevel.size() - 1; i++) {
+			List<ModuleRespVO> currentLevelNodes = nodesByLevel.get(i);
+			List<ModuleRespVO> parentNodes = nodesByLevel.get(i + 1);
+			// 遍历子节点
+			for (int j = 0; j < currentLevelNodes.size(); j++) {
+				ModuleRespVO node = currentLevelNodes.get(j);
+				// TODO 将子节点添加到父节点 考虑用map优化？
+				for (int k = 0; k < parentNodes.size(); k++) {
+					ModuleRespVO parent = parentNodes.get(k);
+					if (parent.getKey() == node.getPid()) {
+						// 如果为空，则初始化子节点。
+						// 为什么不一来就new一个呢？因为前端只要children不是null，就算是空的，也会渲染展开的效果
+						if (parent.getChildren() == null) {
+							parent.setChildren(new ArrayList<>());
+						}
+						parent.getChildren().add(node);
+					}
+				}
+			}
+		}
+
+		// 返回顶层节点
+		return nodesByLevel.get(nodesByLevel.size() - 1);
+
+	}
 }
