@@ -60,6 +60,16 @@ public class TreeNodeServiceImpl implements TreeNodeService {
 		return treeNodes;
 	}
 
+	@Override
+	public List<TreeNode> getSidebar() {
+		QueryWrapper<TreeNode> wrapper = new QueryWrapper<>();
+		wrapper.eq("deleted", 0)
+				.eq("type", SIDEBAR.getType())
+				.orderByAsc("level");
+		List<TreeNode> treeNodes = treeNodeMapper.selectList(wrapper);
+		return treeNodes;
+	}
+
 
 	@Override
 	@Transactional

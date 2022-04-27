@@ -50,6 +50,14 @@ public class TreeNodeController {
 		return treeNodeRespVOs;
 	}
 
+	@PostMapping(value = "/getSidebar")
+	public List<TreeNodeRespVO> getSidebar() {
+		List<TreeNode> list = treeNodeService.getSidebar();
+		List<TreeNodeRespVO> voList = TreeNodeUtil.parseDTO2VO(list);
+		List<TreeNodeRespVO> treeNodeRespVOs = TreeNodeUtil.buildAscOrderdVOTree(voList);
+		return treeNodeRespVOs;
+	}
+
 
 	@PostMapping(value = "/getModule")
 	public List<ModuleRespVO> getModule() {

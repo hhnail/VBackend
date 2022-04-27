@@ -11,8 +11,11 @@ public class TreeNodeRespVO {
 	@ApiModelProperty(value = "唯一编码")
 	private Integer key;
 
-	@ApiModelProperty(value = "名称")
+	@ApiModelProperty(value = "名称1")
 	private String title;
+
+	@ApiModelProperty(value = "名称2")
+	private String label;
 
 	@ApiModelProperty(value = "类型")
 	private String type;
@@ -27,5 +30,5 @@ public class TreeNodeRespVO {
 	private Integer pid;
 
 	@ApiModelProperty(value = "子节点")
-	private List<TreeNodeRespVO> children = new ArrayList<>();
+	private List<TreeNodeRespVO> children = null;
 }

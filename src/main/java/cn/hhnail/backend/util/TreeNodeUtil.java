@@ -107,7 +107,8 @@ public class TreeNodeUtil {
 	 */
 	public static List<TreeNodeRespVO> buildAscOrderdVOTree(List<TreeNodeRespVO> nodes) {
 		// 从最深的层级开始分组
-		Integer currentLevel = nodes.get(nodes.size() - 1).getLevel();
+		Integer currentLevel = nodes.get(nodes.size() - 1)
+				.getLevel();
 
 		// 参数校验、异常处理
 		if (nodes == null || nodes.size() < 1) {
@@ -149,14 +150,22 @@ public class TreeNodeUtil {
 				for (int k = 0; k < parentNodes.size(); k++) {
 					TreeNodeRespVO parent = parentNodes.get(k);
 					if (parent.getKey() == node.getPid()) {
+						if (parent.getChildren() == null) {
+							parent.setChildren(new ArrayList<>());
+						}
 						parent.getChildren().add(node);
 					}
 				}
 			}
 		}
 
+		// 获取顶部节点的level
+		// 不一定都是1。例如侧边栏是属于某个模块的，在数据库维护的level是2
+		Integer topLevel = nodes.get(0)
+				.getLevel();
+
 		// 返回顶层节点
-		return nodesByLevel.get(nodesByLevel.size() - 1);
+		return nodesByLevel.get(nodesByLevel.size() - topLevel);
 	}
 
 	/**
@@ -174,6 +183,7 @@ public class TreeNodeUtil {
 			TreeNodeRespVO vo = new TreeNodeRespVO();
 			BeanUtils.copyProperties(node, vo);
 			vo.setTitle(node.getName());
+			vo.setLabel(node.getName());
 			vo.setKey(node.getId());
 			voList.add(vo);
 		});
@@ -191,6 +201,7 @@ public class TreeNodeUtil {
 			BeanUtils.copyProperties(node, vo);
 			vo.setLabel(node.getName());
 			vo.setKey(String.valueOf(node.getId()));
+			vo.setUrl(node.getRoutingAddress());
 			voList.add(vo);
 		});
 		return voList;

@@ -8,4 +8,6 @@ public class HeaderMenuRespVO {
 	private String key;
 
 	private String label;
+
+	private String url;
 }

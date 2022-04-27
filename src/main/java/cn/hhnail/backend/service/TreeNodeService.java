@@ -14,7 +14,11 @@ public interface TreeNodeService {
 
 	List<TreeNode> getModule();
 
+	List<TreeNode> getSidebar();
+
 	void addModule(UpdateModuleReqVO reqVO);
 
 	void deleteModule(Integer id);
+
+
 }
