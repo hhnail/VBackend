@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jdk.nashorn.internal.objects.NativeArray.lastIndexOf;
+
 @RestController
 @RequestMapping("/vapi")
 public class TreeNodeController {
@@ -81,6 +83,10 @@ public class TreeNodeController {
 			ModuleRespVO vo = new ModuleRespVO();
 			BeanUtils.copyProperties(node, vo);
 			vo.setKey(node.getId());
+			// 设置父模块路径
+			String currentRoutingAddress = node.getRoutingAddress();
+			int endIndex = currentRoutingAddress.lastIndexOf("/");
+			vo.setParentRoutingAddress(currentRoutingAddress.substring(0,endIndex));
 			voList.add(vo);
 		});
 

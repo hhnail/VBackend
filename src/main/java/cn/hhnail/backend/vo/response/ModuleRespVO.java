@@ -15,6 +15,8 @@ public class ModuleRespVO {
 
 	private String routingAddress;
 
+	private String parentRoutingAddress;
+
 	private Integer level;
 
 	private Integer pid;

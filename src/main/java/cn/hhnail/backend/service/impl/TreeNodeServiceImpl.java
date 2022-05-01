@@ -43,6 +43,7 @@ public class TreeNodeServiceImpl implements TreeNodeService {
 	public List<TreeNode> getHeaderMenu() {
 		QueryWrapper<TreeNode> wrapper = new QueryWrapper<>();
 		wrapper.eq("deleted", 0)
+				.orderByAsc("order_id")
 				.eq("type", HEADER_MENU.getType());
 		List<TreeNode> treeNodes = treeNodeMapper.selectList(wrapper);
 		return treeNodes;
