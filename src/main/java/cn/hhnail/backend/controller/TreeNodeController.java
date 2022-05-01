@@ -43,6 +43,10 @@ public class TreeNodeController {
 	}
 
 
+	/**
+	 * 获取顶部菜单——module level == 1
+	 * @return
+	 */
 	@PostMapping(value = "/getHeaderMenu")
 	public List<HeaderMenuRespVO> getHeaderMenu() {
 		List<TreeNode> list = treeNodeService.getHeaderMenu();
@@ -50,6 +54,10 @@ public class TreeNodeController {
 		return treeNodeRespVOs;
 	}
 
+	/**
+	 * 获取系统侧边栏——module level >= 2
+	 * @return
+	 */
 	@PostMapping(value = "/getSidebar")
 	public List<TreeNodeRespVO> getSidebar() {
 		List<TreeNode> list = treeNodeService.getSidebar();
@@ -59,6 +67,10 @@ public class TreeNodeController {
 	}
 
 
+	/**
+	 * 模块管理——获取模块信息
+	 * @return
+	 */
 	@PostMapping(value = "/getModule")
 	public List<ModuleRespVO> getModule() {
 		List<ModuleRespVO> voList = new ArrayList<>();
@@ -78,6 +90,11 @@ public class TreeNodeController {
 	}
 
 
+	/**
+	 * 模块管理——添加模块
+	 * @param reqVO
+	 * @return
+	 */
 	@PostMapping(value = "/addModule")
 	public String addModule(@RequestBody UpdateModuleReqVO reqVO) {
 		logger.info(reqVO.toString());
@@ -86,6 +103,11 @@ public class TreeNodeController {
 		return "";
 	}
 
+	/**
+	 * 模块管理——删除模块
+	 * @param id
+	 * @return
+	 */
 	@PostMapping(value = "/deleteModule")
 	public String deleteModule(@RequestParam("id") Integer id) {
 		logger.info("=v 删除的id", id);

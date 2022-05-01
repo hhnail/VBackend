@@ -16,19 +16,19 @@ import java.util.List;
 @RequestMapping("/vapi")
 public class SysTableController {
 
-	@Autowired
-	SysTableService sysTableService;
+    @Autowired
+    SysTableService sysTableService;
 
-	@PostMapping(value = "/getTables")
-	public List<SysTableRespVO> getTables() {
-		List<SysTable> list = sysTableService.getTables();
-		List<SysTableRespVO> vos = new ArrayList<>();
-		list.forEach(item->{
-			SysTableRespVO vo = new SysTableRespVO();
-			BeanUtils.copyProperties(item,vo);
-			vos.add(vo);
-		});
-		return vos;
-	}
+    @PostMapping(value = "/getTables")
+    public List<SysTableRespVO> getTables() {
+        List<SysTable> list = sysTableService.getTables();
+        List<SysTableRespVO> vos = new ArrayList<>();
+        list.forEach(item -> {
+            SysTableRespVO vo = new SysTableRespVO();
+            BeanUtils.copyProperties(item, vo);
+            vos.add(vo);
+        });
+        return vos;
+    }
 
 }

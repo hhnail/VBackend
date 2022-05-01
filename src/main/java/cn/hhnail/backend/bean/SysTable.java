@@ -7,12 +7,12 @@ import lombok.Data;
 @Data
 public class SysTable {
 
-	@TableId(type = IdType.AUTO)
-	private Integer id;
+    @TableId(type = IdType.AUTO)
+    private Integer id;
 
-	private String name;
+    private String name;
 
-	private Integer deleted;
+    private Integer deleted;
 
 
 }

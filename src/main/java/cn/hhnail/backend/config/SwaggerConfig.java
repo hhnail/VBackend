@@ -16,23 +16,23 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @EnableWebMvc
 public class SwaggerConfig {
-	@Bean
-	public Docket productApi() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.apiInfo(apiInfo())
-				.select()
-				.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))  //添加ApiOperiation注解的被扫描
-				.paths(PathSelectors.any())
-				.build();
+    @Bean
+    public Docket productApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))  //添加ApiOperiation注解的被扫描
+                .paths(PathSelectors.any())
+                .build();
 
-	}
+    }
 
-	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder()
-				.title("swagger和springBoot整合")
-				.description("swagger的API文档")
-				.version("1.0").build();
-	}
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("swagger和springBoot整合")
+                .description("swagger的API文档")
+                .version("1.0").build();
+    }
 
 }
 
