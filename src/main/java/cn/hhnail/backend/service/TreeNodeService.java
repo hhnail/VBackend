@@ -14,7 +14,7 @@ public interface TreeNodeService {
 
 	List<TreeNode> getModule();
 
-	List<TreeNode> getSidebar();
+	List<TreeNode> getSidebar(String pid);
 
 	void addModule(UpdateModuleReqVO reqVO);
 

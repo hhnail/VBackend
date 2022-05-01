@@ -61,10 +61,11 @@ public class TreeNodeServiceImpl implements TreeNodeService {
 	}
 
 	@Override
-	public List<TreeNode> getSidebar() {
+	public List<TreeNode> getSidebar(String pid) {
 		QueryWrapper<TreeNode> wrapper = new QueryWrapper<>();
 		wrapper.eq("deleted", 0)
 				.eq("type", SIDEBAR.getType())
+				.eq("module_id", pid)
 				.orderByAsc("level");
 		List<TreeNode> treeNodes = treeNodeMapper.selectList(wrapper);
 		return treeNodes;

@@ -59,8 +59,8 @@ public class TreeNodeController {
 	 * @return
 	 */
 	@PostMapping(value = "/getSidebar")
-	public List<TreeNodeRespVO> getSidebar() {
-		List<TreeNode> list = treeNodeService.getSidebar();
+	public List<TreeNodeRespVO> getSidebar(@RequestParam("pid") String pid) {
+		List<TreeNode> list = treeNodeService.getSidebar(pid);
 		List<TreeNodeRespVO> voList = TreeNodeUtil.parseDTO2VO(list);
 		List<TreeNodeRespVO> treeNodeRespVOs = TreeNodeUtil.buildAscOrderdVOTree(voList);
 		return treeNodeRespVOs;

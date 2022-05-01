@@ -185,6 +185,7 @@ public class TreeNodeUtil {
 			vo.setTitle(node.getName());
 			vo.setLabel(node.getName());
 			vo.setKey(node.getId());
+			vo.setUrl(node.getRoutingAddress());
 			voList.add(vo);
 		});
 		return voList;

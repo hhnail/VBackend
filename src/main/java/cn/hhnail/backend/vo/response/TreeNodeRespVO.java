@@ -29,6 +29,9 @@ public class TreeNodeRespVO {
 	@ApiModelProperty(value = "父编码")
 	private Integer pid;
 
+	@ApiModelProperty(value = "路由地址")
+	private String url;
+
 	@ApiModelProperty(value = "子节点")
 	private List<TreeNodeRespVO> children = null;
 }
