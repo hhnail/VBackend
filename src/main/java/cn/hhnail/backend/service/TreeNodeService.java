@@ -20,5 +20,5 @@ public interface TreeNodeService {
 
 	void deleteModule(Integer id);
 
-
+	void updateModule(UpdateModuleReqVO reqVO);
 }

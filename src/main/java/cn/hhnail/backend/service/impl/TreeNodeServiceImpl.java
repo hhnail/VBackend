@@ -95,4 +95,16 @@ public class TreeNodeServiceImpl implements TreeNodeService {
 		// 仅更新wrapper提供的字段
 		treeNodeMapper.update(null, uw);
 	}
+
+
+	@Override
+	public void updateModule(UpdateModuleReqVO reqVO) {
+		UpdateWrapper uw = new UpdateWrapper();
+		uw.eq("id", reqVO.getId());
+		uw.set("name", reqVO.getName());
+		uw.set("order_id", reqVO.getOrderId());
+		uw.set("routing_address", reqVO.getRoutingAddress());
+		// 仅更新wrapper提供的字段
+		treeNodeMapper.update(null, uw);
+	}
 }

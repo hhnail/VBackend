@@ -7,6 +7,8 @@ import lombok.ToString;
 @ToString
 public class UpdateModuleReqVO {
 
+	private Integer id;
+
 	private String name;
 
 	private String type;
@@ -14,6 +16,8 @@ public class UpdateModuleReqVO {
 	private Integer level;
 
 	private String routingAddress;
+
+	private Integer orderId;
 
 	private Integer pid;
 }

@@ -4,6 +4,7 @@ import cn.hhnail.backend.bean.TreeNode;
 import cn.hhnail.backend.service.TreeNodeService;
 import cn.hhnail.backend.util.TreeNodeUtil;
 import cn.hhnail.backend.vo.request.UpdateModuleReqVO;
+import cn.hhnail.backend.vo.response.AppResponse;
 import cn.hhnail.backend.vo.response.HeaderMenuRespVO;
 import cn.hhnail.backend.vo.response.ModuleRespVO;
 import cn.hhnail.backend.vo.response.TreeNodeRespVO;
@@ -108,6 +109,25 @@ public class TreeNodeController {
 
 		return "";
 	}
+
+	/**
+	 * 模块管理——更新模块信息
+	 * @param reqVO
+	 * @return
+	 */
+	@PostMapping(value = "/updateModule")
+	public AppResponse<String> updateModule(@RequestBody UpdateModuleReqVO reqVO) {
+		try {
+			logger.info(reqVO.toString());
+			treeNodeService.updateModule(reqVO);
+			return AppResponse.ok("");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AppResponse.fail("");
+		}
+	}
+
+
 
 	/**
 	 * 模块管理——删除模块
