@@ -16,8 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static cn.hhnail.backend.enums.TreeNodeType.HEADER_MENU;
-import static cn.hhnail.backend.enums.TreeNodeType.SIDEBAR;
+import static cn.hhnail.backend.enums.TreeNodeType.*;
 
 @Service
 public class TreeNodeServiceImpl implements TreeNodeService {
@@ -106,5 +105,15 @@ public class TreeNodeServiceImpl implements TreeNodeService {
 		uw.set("routing_address", reqVO.getRoutingAddress());
 		// 仅更新wrapper提供的字段
 		treeNodeMapper.update(null, uw);
+	}
+
+	@Override
+	public List<TreeNode> getTableGroup() {
+		QueryWrapper<TreeNode> wrapper = new QueryWrapper<>();
+		wrapper.eq("deleted", 0)
+				.orderByAsc("level")
+				.eq("type", TABLE_GROUP.getType());
+		List<TreeNode> treeNodes = treeNodeMapper.selectList(wrapper);
+		return treeNodes;
 	}
 }

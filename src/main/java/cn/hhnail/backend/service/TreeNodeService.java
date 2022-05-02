@@ -21,4 +21,6 @@ public interface TreeNodeService {
 	void deleteModule(Integer id);
 
 	void updateModule(UpdateModuleReqVO reqVO);
+
+	List<TreeNode> getTableGroup();
 }

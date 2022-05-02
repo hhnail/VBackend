@@ -13,12 +13,13 @@ import java.util.stream.Collectors;
 public class TreeNodeUtil {
 
 	/**
-	 * 将平级节点构建为树结构
+	 * 将平级DTO节点构建为树结构
 	 *
 	 * @param nodes
 	 * @return
 	 */
-	public static List<TreeNode> buildDTOTree(List<TreeNode> nodes) {
+	@Deprecated
+	private static List<TreeNode> buildDTOTree(List<TreeNode> nodes) {
 
 		// 过滤出1级节点
 		List<TreeNode> nodesLevel1 = nodes.stream()
@@ -56,12 +57,13 @@ public class TreeNodeUtil {
 
 
 	/**
-	 * 将平级节点构建为树结构
+	 * 将平级VO节点构建为树结构
 	 * 暂时只支持3层
 	 *
 	 * @param nodes
 	 * @return
 	 */
+	@Deprecated
 	public static List<TreeNodeRespVO> buildVOTree(List<TreeNodeRespVO> nodes) {
 		// 过滤出1级节点
 		List<TreeNodeRespVO> nodesLevel1 = nodes.stream()
@@ -170,9 +172,12 @@ public class TreeNodeUtil {
 
 	/**
 	 * 将DTO转化为VO
-	 * <p>
-	 * id -> key
-	 * name -> title
+	 *
+	 * 【dto field --> vo field】 map 规则
+	 * name --> title/label
+	 * id --> key
+	 * routingAddress --> url
+	 * leafy --> isLeaf
 	 *
 	 * @param nodes
 	 * @return
@@ -186,6 +191,7 @@ public class TreeNodeUtil {
 			vo.setLabel(node.getName());
 			vo.setKey(node.getId());
 			vo.setUrl(node.getRoutingAddress());
+			vo.setIsLeaf(node.getLeafy() == 1);
 			voList.add(vo);
 		});
 		return voList;

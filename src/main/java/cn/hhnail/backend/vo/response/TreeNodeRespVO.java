@@ -23,6 +23,9 @@ public class TreeNodeRespVO {
 	@ApiModelProperty(value = "叶子节点标记(0/1)")
 	private Integer leafy;
 
+	@ApiModelProperty(value = "叶子节点标记(false/true)")
+	private Boolean isLeaf;
+
 	@ApiModelProperty(value = "所处层级")
 	private Integer level;
 

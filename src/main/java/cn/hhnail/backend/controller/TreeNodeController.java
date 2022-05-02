@@ -142,4 +142,15 @@ public class TreeNodeController {
 	}
 
 
+	/**
+	 * 数据重构——查询系统表分组
+	 */
+	@PostMapping(value = "/getTableGroup")
+	public AppResponse<List<TreeNodeRespVO>> getTableGroup() {
+		List<TreeNode> list = treeNodeService.getTableGroup();
+		List<TreeNodeRespVO> voList = TreeNodeUtil.parseDTO2VO(list);
+		List<TreeNodeRespVO> resp = TreeNodeUtil.buildAscOrderdVOTree(voList);
+		return AppResponse.ok(resp);
+	}
+
 }
