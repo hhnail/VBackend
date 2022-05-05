@@ -6,6 +6,7 @@ package cn.hhnail.backend.enums;
 public enum TreeNodeType {
 
 	TABLE_GROUP("TABLE_GROUP","表分组"),
+	ROLE_GROUP("ROLE_GROUP","角色分组"),
 	// 菜单
 	HEADER_MENU("HEADER_MENU","顶部菜单"),
 	SIDEBAR("SIDEBAR","侧边栏");
