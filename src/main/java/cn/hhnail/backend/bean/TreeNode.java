@@ -45,8 +45,13 @@ public class TreeNode {
 	@TableField(fill = FieldFill.INSERT_UPDATE)
 	private String routingAddress;
 
+	@ApiModelProperty(value = "排序号")
 	@TableField(fill = FieldFill.INSERT_UPDATE)
 	private String orderId;
+
+	@ApiModelProperty(value = "所属模块")
+	@TableField(fill = FieldFill.INSERT_UPDATE)
+	private Integer moduleId;
 
 	@ApiModelProperty(value = "子节点集合")
 	// 不是数据库字段

@@ -66,6 +66,8 @@ public class TreeNodeServiceImpl implements TreeNodeService {
 		wrapper.eq("deleted", 0)
 				.eq("type", SIDEBAR.getType())
 				.eq("module_id", pid)
+				// 侧边栏level都是2及以上，1是顶部菜单
+				.gt("level",1)
 				.orderByAsc("level");
 		List<TreeNode> treeNodes = treeNodeMapper.selectList(wrapper);
 		return treeNodes;

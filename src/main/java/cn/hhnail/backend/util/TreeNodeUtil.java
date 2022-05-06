@@ -108,14 +108,16 @@ public class TreeNodeUtil {
 	 * @return
 	 */
 	public static List<TreeNodeRespVO> buildAscOrderdVOTree(List<TreeNodeRespVO> nodes) {
-		// 从最深的层级开始分组
-		Integer currentLevel = nodes.get(nodes.size() - 1)
-				.getLevel();
 
 		// 参数校验、异常处理
 		if (nodes == null || nodes.size() < 1) {
 			throw new RuntimeException("节点集合为空");
 		}
+
+		// 从最深的层级开始分组
+		Integer currentLevel = nodes.get(nodes.size() - 1)
+				.getLevel();
+
 		if (currentLevel == null || currentLevel < 1) {
 			throw new RuntimeException("节点【所处层级】字段维护有误");
 		}

@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -63,10 +64,15 @@ public class TreeNodeController {
 	 */
 	@PostMapping(value = "/getSidebar")
 	public List<TreeNodeRespVO> getSidebar(@RequestParam("pid") String pid) {
-		List<TreeNode> list = treeNodeService.getSidebar(pid);
-		List<TreeNodeRespVO> voList = TreeNodeUtil.parseDTO2VO(list);
-		List<TreeNodeRespVO> treeNodeRespVOs = TreeNodeUtil.buildAscOrderdVOTree(voList);
-		return treeNodeRespVOs;
+		try {
+			List<TreeNode> list = treeNodeService.getSidebar(pid);
+			List<TreeNodeRespVO> voList = TreeNodeUtil.parseDTO2VO(list);
+			List<TreeNodeRespVO> treeNodeRespVOs = TreeNodeUtil.buildAscOrderdVOTree(voList);
+			return treeNodeRespVOs;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ArrayList<>();
+		}
 	}
 
 
@@ -103,7 +109,7 @@ public class TreeNodeController {
 	 * @return
 	 */
 	@PostMapping(value = "/addModule")
-	public String addModule(@RequestBody UpdateModuleReqVO reqVO) {
+	public String addModule(@RequestBody @Validated UpdateModuleReqVO reqVO) {
 		logger.info(reqVO.toString());
 		treeNodeService.addModule(reqVO);
 
