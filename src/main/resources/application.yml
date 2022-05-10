@@ -13,7 +13,8 @@ mybatis-plus:
   configuration:
     #    mybatis日志（查看数据流、最终的sql等）
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    #    自动映射驼峰命名   eg：userName —> user_name
+    #    驼峰命名自动映射   eg：userName —> user_name
     map-underscore-to-camel-case: true
+    mapper-location: mapper/*.xml
 
 

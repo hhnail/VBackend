@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class SysTable {
 
@@ -13,6 +15,8 @@ public class SysTable {
     private String name;
 
     private Integer deleted;
+
+    private List<SysColumn> columns;
 
 
 }
