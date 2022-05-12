@@ -4,7 +4,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/hhnail
     username: root
-    password: 123456
+    password: root
 #服务
 sever:
   #  端口号
@@ -15,6 +15,6 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     #    驼峰命名自动映射   eg：userName —> user_name
     map-underscore-to-camel-case: true
-    mapper-location: mapper/*.xml
+#    mapper-location: mapper/*.xml
 
 
