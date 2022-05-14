@@ -23,4 +23,6 @@ public interface TreeNodeService {
 	void updateModule(UpdateModuleReqVO reqVO);
 
 	List<TreeNode> getTableGroup();
+
+	List<TreeNode> getRoleGroup();
 }

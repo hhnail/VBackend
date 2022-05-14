@@ -159,4 +159,15 @@ public class TreeNodeController {
 		return AppResponse.ok(resp);
 	}
 
+	/**
+	 * 角色管理——查询角色分组
+	 */
+	@PostMapping(value = "/getRoleGroup")
+	public AppResponse<List<TreeNodeRespVO>> getRoleGroup() {
+		List<TreeNode> list = treeNodeService.getRoleGroup();
+		List<TreeNodeRespVO> voList = TreeNodeUtil.parseDTO2VO(list);
+		List<TreeNodeRespVO> resp = TreeNodeUtil.buildAscOrderdVOTree(voList);
+		return AppResponse.ok(resp);
+	}
+
 }

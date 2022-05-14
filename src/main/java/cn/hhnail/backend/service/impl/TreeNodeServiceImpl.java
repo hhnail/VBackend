@@ -118,4 +118,14 @@ public class TreeNodeServiceImpl implements TreeNodeService {
 		List<TreeNode> treeNodes = treeNodeMapper.selectList(wrapper);
 		return treeNodes;
 	}
+
+	@Override
+	public List<TreeNode> getRoleGroup() {
+		QueryWrapper<TreeNode> wrapper = new QueryWrapper<>();
+		wrapper.eq("deleted", 0)
+				.orderByAsc("level")
+				.eq("type", ROLE_GROUP.getType());
+		List<TreeNode> treeNodes = treeNodeMapper.selectList(wrapper);
+		return treeNodes;
+	}
 }
