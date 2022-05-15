@@ -8,11 +8,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class TreeNode {
+public class TreeNode  implements Serializable {
 
 	@ApiModelProperty(value = "唯一编码")
 	// 自增主键

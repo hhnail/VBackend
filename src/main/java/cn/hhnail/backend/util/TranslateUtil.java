@@ -3,11 +3,9 @@ package cn.hhnail.backend.util;
 import cn.hhnail.backend.bean.TranslateResult;
 import cn.hhnail.backend.enums.Languages;
 import com.alibaba.fastjson.JSON;
-import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Random;
 
 /**
  * 翻译工具类
