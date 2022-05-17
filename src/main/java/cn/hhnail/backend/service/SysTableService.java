@@ -1,9 +1,16 @@
 package cn.hhnail.backend.service;
 
 import cn.hhnail.backend.bean.SysTable;
+import cn.hhnail.backend.vo.request.SysTableReqVO;
 
 import java.util.List;
 
 public interface SysTableService {
 	List<SysTable> getTables();
+
+    /**
+     * 创建表
+     * @param reqVO （表信息、字段、初始化数据）
+     */
+    void createTable(SysTableReqVO reqVO);
 }

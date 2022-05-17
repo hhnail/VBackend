@@ -35,9 +35,9 @@ public class SysTableController {
         return vos;
     }
 
- @PostMapping(value = "/createTable")
+    @PostMapping(value = "/createTable")
     public AppResponse<String> createTable(@RequestBody SysTableReqVO reqVO) {
-
+        sysTableService.createTable(reqVO);
         return AppResponse.ok(null);
     }
 
