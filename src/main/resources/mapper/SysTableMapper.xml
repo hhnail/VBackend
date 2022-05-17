@@ -15,8 +15,6 @@
     </sql>
 
 
-
-
     <!-- 查询表（已过时） -->
     <select id="selectTables" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -24,7 +22,14 @@
         from sys_table
     </select>
 
-
+    <update id="createTable" parameterType="cn.hhnail.backend.vo.request.SysTableReqVO">
+        CREATE TABLE `${englishName}`
+        (
+            `id`   int NOT NULL COMMENT '123',
+            `name` varchar(255) NULL,
+            PRIMARY KEY (`id`)
+        );
+    </update>
 
 
 </mapper>

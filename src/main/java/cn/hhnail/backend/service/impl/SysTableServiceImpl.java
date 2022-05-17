@@ -24,9 +24,7 @@ public class SysTableServiceImpl implements SysTableService {
 
 	@Override
 	public void createTable(SysTableReqVO reqVO) {
-
-
-
+		sysTableMapper.createTable(reqVO);
 
 
 	}
