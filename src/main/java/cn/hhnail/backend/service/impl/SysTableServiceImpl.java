@@ -24,8 +24,15 @@ public class SysTableServiceImpl implements SysTableService {
 
 	@Override
 	public void createTable(SysTableReqVO reqVO) {
+		// 1、建表
 		sysTableMapper.createTable(reqVO);
 
+		// 2、维护元表
+
+
+		// 3、维护字段表
+
+		// 【4、插入初始化数据】
 
 	}
 
