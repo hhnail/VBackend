@@ -13,4 +13,11 @@ public interface SysTableService {
      * @param reqVO （表信息、字段、初始化数据）
      */
     void createTable(SysTableReqVO reqVO);
+
+    /**
+     * 测试mybatis
+     * @return
+     */
+    @Deprecated
+    List<SysTable> selectTables();
 }

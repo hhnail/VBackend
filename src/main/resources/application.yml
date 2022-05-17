@@ -16,6 +16,11 @@ mybatis-plus:
     #    自动映射驼峰命名   eg：userName —> user_name
     map-underscore-to-camel-case: true
 
+
+mybatis:
+  type-aliases-package: com.hhnail.backend.bean
+  mapper-locations: classpath*:com/**/*Mapper.xml
+
 third-api:
   baidu-translate:
     url: https://fanyi-api.baidu.com/api/trans/vip/translate

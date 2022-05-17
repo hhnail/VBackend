@@ -30,4 +30,9 @@ public class SysTableServiceImpl implements SysTableService {
 
 
 	}
+
+	@Override
+	public List<SysTable> selectTables() {
+		return sysTableMapper.selectTables();
+	}
 }

@@ -41,4 +41,10 @@ public class SysTableController {
         return AppResponse.ok(null);
     }
 
+    @PostMapping(value = "/selectTables")
+    public AppResponse<String> selectTables() {
+        sysTableService.selectTables();
+        return AppResponse.ok(null);
+    }
+
 }
