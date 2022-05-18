@@ -10,13 +10,15 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.stereotype.Component;
+
 
 
 public class HttpUtil {
 
-    public static void main(String[] args) {
-
-    }
+    // public static void main(String[] args) {
+    //
+    // }
 
 
     /**

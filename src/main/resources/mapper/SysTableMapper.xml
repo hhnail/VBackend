@@ -1,35 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.hhnail.backend.mapper.SysTableMapper">
-    <resultMap id="BaseResultMap" type="cn.hhnail.backend.bean.SysTable">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="chinese_name" property="chineseName" jdbcType="VARCHAR"/>
-        <result column="english_name" property="englishName" jdbcType="VARCHAR"/>
-        <result column="order_id" property="orderId" jdbcType="INTEGER"/>
-        <result column="deleted" property="deleted" jdbcType="INTEGER"/>
-    </resultMap>
-    <!-- 基础字段 -->
-    <sql id="Base_Column_List">
-        id
-        , chinese_name, english_name, order_id,deleted
-    </sql>
+	<resultMap id="BaseResultMap" type="cn.hhnail.backend.bean.SysTable">
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="chinese_name" property="chineseName" jdbcType="VARCHAR"/>
+		<result column="english_name" property="englishName" jdbcType="VARCHAR"/>
+		<result column="order_id" property="orderId" jdbcType="INTEGER"/>
+		<result column="deleted" property="deleted" jdbcType="INTEGER"/>
+	</resultMap>
+	<!-- 基础字段 -->
+	<sql id="Base_Column_List">
+		id
+		, chinese_name, english_name, order_id,deleted
+	</sql>
 
 
-    <!-- 查询表（已过时） -->
-    <select id="selectTables" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from sys_table
-    </select>
+	<!-- 查询表（已过时） -->
+	<select id="selectTables" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_table
+	</select>
 
-    <update id="createTable" parameterType="cn.hhnail.backend.vo.request.SysTableReqVO">
-        CREATE TABLE `${englishName}`
-        (
-            `id`   int NOT NULL COMMENT '123',
-            `name` varchar(255) NULL,
-            PRIMARY KEY (`id`)
-        );
-    </update>
+	<update id="createTable" parameterType="cn.hhnail.backend.vo.request.SysTableReqVO">
+		CREATE TABLE `${englishName}`
+		<foreach collection="columns" item="columnItem" separator="," open="(" close=", PRIMARY KEY (`id`))">
+			`${columnItem.name}`
+		    <choose>
+			    <when test="columnItem.type == 'varchar'">${columnItem.type}(${columnItem.length})</when>
+			    <otherwise>${columnItem.type}</otherwise>
+		    </choose>
+			<choose>
+				<when test="columnItem.nullable == 0">NOT NULL</when>
+				<otherwise>NULL</otherwise>
+			</choose>
+			<if test="columnItem.remark">
+				COMMENT "${columnItem.remark}"
+			</if>
+		</foreach>
+	</update>
 
 
 </mapper>

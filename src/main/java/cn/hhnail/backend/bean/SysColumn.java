@@ -1,18 +1,26 @@
 package cn.hhnail.backend.bean;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
+
+import java.io.Serializable;
 
 /**
  *
  */
 @Data
 @ToString
-public class SysColumn {
+public class SysColumn implements Serializable {
 
+        @ApiModelProperty(value = "英文名")
         private String name;
+        @ApiModelProperty(value = "中文名")
+        private String label;
+        @ApiModelProperty(value = "字段类型（varchar、int等）")
         private String type;
-        // 长度
+        @ApiModelProperty(value = "长度")
         private Integer length;
         // 精度
         private String accuracy;

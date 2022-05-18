@@ -4,7 +4,10 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/hhnail
     username: root
-    password: 123456
+#    longshine密码
+    password: root
+#    thunder密码
+#    password: 123456
 #服务
 sever:
   #  端口号

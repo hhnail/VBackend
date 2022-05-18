@@ -136,6 +136,13 @@
 			<version>1.2.66</version>
 		</dependency>
 
+		<!-- springboot yml 自动注入 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -3,6 +3,11 @@ package cn.hhnail.backend.util;
 import cn.hhnail.backend.bean.TranslateResult;
 import cn.hhnail.backend.enums.Languages;
 import com.alibaba.fastjson.JSON;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
@@ -10,9 +15,18 @@ import java.nio.charset.StandardCharsets;
 /**
  * 翻译工具类
  */
+@Component
+@Data
+// @ConfigurationProperties(prefix = "third-api")
+// @PropertySource(value="classpath:third-api.properties")
 public class TranslateUtil {
 
+    // TODO yml注入配置
+    // @Value(value = "${third-api.baidu-translate.url}")
+    // @Value(value = "${url}")
+    // private static String URL;
     private final static String URL = "http://api.fanyi.baidu.com/api/trans/vip/translate";
+
 
     private final static String PARAMS = "?q=%s&from=%s&to=%s&appid=%s&salt=%s&sign=%s";
 
