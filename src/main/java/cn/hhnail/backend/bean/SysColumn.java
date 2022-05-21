@@ -26,6 +26,11 @@ public class SysColumn implements Serializable {
         private String accuracy;
         // 是否必填
         private Integer nullable;
+        @ApiModelProperty(value = "是否可见")
+        private Integer visible;
+
+        @ApiModelProperty(value = "删除标记")
+        private Integer deleted;
         // 是否虚拟
         private Integer virtual;
         // 键

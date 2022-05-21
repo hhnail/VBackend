@@ -20,4 +20,6 @@ public interface SysTableService {
      */
     @Deprecated
     List<SysTable> selectTables();
+
+    void dropTable(String tableName);
 }

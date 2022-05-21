@@ -41,9 +41,9 @@ public class SysTableController {
     @PostMapping(value = "/createTable")
     public AppResponse<String> createTable(@RequestBody SysTableReqVO reqVO) {
         try {
-            String englishName = reqVO.getEnglishName();
+            String name = reqVO.getName();
             // 参数校验
-            if (englishName == null || StringUtils.isEmpty(englishName)) {
+            if (name == null || StringUtils.isEmpty(name)) {
                 throw new RuntimeException("表英文名不得为空");
             }
             sysTableService.createTable(reqVO);

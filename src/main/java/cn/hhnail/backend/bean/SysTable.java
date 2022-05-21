@@ -14,9 +14,9 @@ public class SysTable  implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    private String chineseName;
+    private String label;
 
-    private String englishName;
+    private String name;
 
     private Integer orderId;
 
