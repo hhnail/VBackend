@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/vapi")
@@ -47,8 +48,8 @@ public class DemoController {
 	}
 
 	@ApiOperation(value = "测试mp")
-	@GetMapping("/testAutowired")
-	public final String testAutowired() {
+	@PostMapping("/testAutowired")
+	public final String testAutowired(@RequestBody String str1) {
 		System.out.println(("----- selectAll method test ------"));
 		List<Test> userList = demoMapper.selectList(null);
 		userList.forEach(System.out::println);
