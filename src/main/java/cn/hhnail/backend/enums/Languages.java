@@ -26,5 +26,9 @@ public enum Languages {
         return code;
     }
 
+    public boolean equals(String code){
+        return this.getCode().equals(code);
+    }
+
 
 }

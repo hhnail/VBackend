@@ -39,10 +39,20 @@ public class DemoController {
 
 	@ApiOperation(value = "测试mp")
 	@GetMapping("/demoMp")
-	public void demoMp() {
+	public String demoMp() {
 		System.out.println(("----- selectAll method test ------"));
 		List<Test> userList = demoMapper.selectList(null);
 		userList.forEach(System.out::println);
+		return "注入成功！";
+	}
+
+	@ApiOperation(value = "测试mp")
+	@GetMapping("/testAutowired")
+	public final String testAutowired() {
+		System.out.println(("----- selectAll method test ------"));
+		List<Test> userList = demoMapper.selectList(null);
+		userList.forEach(System.out::println);
+		return "注入成功！";
 	}
 
 }

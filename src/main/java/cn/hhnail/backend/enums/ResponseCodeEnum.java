@@ -18,15 +18,12 @@ public enum ResponseCodeEnum {
 	public Integer getCode() {
 		return code;
 	}
-	public void setCode(Integer code) {
-		this.code = code;
-	}
 	public String getMsg() {
 		return msg;
 	}
-	public void setMsg(String msg) {
-		this.msg = msg;
+
+	public boolean equals(Integer code){
+		return this.getCode().equals(code);
 	}
-	
 
 }
