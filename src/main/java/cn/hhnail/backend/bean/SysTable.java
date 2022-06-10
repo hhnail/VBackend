@@ -20,6 +20,8 @@ public class SysTable  implements Serializable {
 
     private Integer orderId;
 
+    private Integer moduleId;
+
     private Integer deleted;
 
 

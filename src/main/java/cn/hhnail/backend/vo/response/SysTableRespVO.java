@@ -14,4 +14,12 @@ public class SysTableRespVO {
 
 	private String name;
 
+	private String label;
+
+	private Integer moduleId;
+
+	private Integer orderId;
+
+	private String remark;
+
 }
