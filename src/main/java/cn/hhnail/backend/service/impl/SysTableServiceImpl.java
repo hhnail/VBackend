@@ -75,4 +75,13 @@ public class SysTableServiceImpl implements SysTableService {
     public void dropTable(String tableName) {
         sysTableMapper.dropTable(tableName);
     }
+
+    @Override
+    public void updateTable(SysTableReqVO reqVO) {
+        SysTable entity = new SysTable();
+
+        BeanUtils.copyProperties(reqVO,entity);
+
+        sysTableMapper.updateById(entity);
+    }
 }

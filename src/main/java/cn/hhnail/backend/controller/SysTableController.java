@@ -56,6 +56,25 @@ public class SysTableController {
         }
     }
 
+    @Transactional
+    @PostMapping(value = "/updateTable")
+    public AppResponse<String> updateTable(@RequestBody SysTableReqVO reqVO) {
+        try {
+            String name = reqVO.getName();
+            // 参数校验
+            if (name == null || StringUtils.isEmpty(name)) {
+                throw new RuntimeException("表英文名不得为空");
+            }
+            sysTableService.updateTable(reqVO);
+            return AppResponse.ok(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            AppResponse<String> fail = AppResponse.fail();
+            fail.setMsg(e.getMessage());
+            return fail;
+        }
+    }
+
     @PostMapping(value = "/selectTables")
     public AppResponse<String> selectTables() {
         sysTableService.selectTables();

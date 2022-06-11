@@ -22,4 +22,6 @@ public interface SysTableService {
     List<SysTable> selectTables();
 
     void dropTable(String tableName);
+
+    void updateTable(SysTableReqVO reqVO);
 }
