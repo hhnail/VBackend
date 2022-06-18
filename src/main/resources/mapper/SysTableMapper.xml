@@ -70,4 +70,9 @@
     <delete id="dropTable" parameterType="java.lang.String">
         drop table ${tableName}
     </delete>
+
+    <!-- void alterTableName(String oldName, String newName); -->
+    <update id="alterTableName" parameterType="java.lang.String">
+        alter table ${oldName} RENAME TO ${newName}
+    </update>
 </mapper>

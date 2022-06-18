@@ -19,6 +19,8 @@ public class SysTableReqVO implements Serializable {
 
     private String name;
 
+    private String oldName;
+
     private Integer orderId;
 
     private Integer moduleId;

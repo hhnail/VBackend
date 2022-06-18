@@ -3,6 +3,7 @@ package cn.hhnail.backend.service.impl;
 import cn.hhnail.backend.bean.SysTable;
 import cn.hhnail.backend.mapper.SysTableMapper;
 import cn.hhnail.backend.service.SysTableService;
+import cn.hhnail.backend.util.StringUtils;
 import cn.hhnail.backend.vo.request.SysTableReqVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.BeanUtils;
@@ -80,8 +81,17 @@ public class SysTableServiceImpl implements SysTableService {
     public void updateTable(SysTableReqVO reqVO) {
         SysTable entity = new SysTable();
 
-        BeanUtils.copyProperties(reqVO,entity);
+        BeanUtils.copyProperties(reqVO, entity);
 
+        // 更新逻辑表信息
         sysTableMapper.updateById(entity);
+
+        // 更新物理表信息
+        String oldName = reqVO.getOldName();
+        String newName = reqVO.getName();
+        if (StringUtils.notEmpty(oldName) && !oldName.equals(newName)) {
+            sysTableMapper.alterTableName(oldName, newName);
+        }
+
     }
 }

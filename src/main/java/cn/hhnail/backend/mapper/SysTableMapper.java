@@ -20,5 +20,18 @@ public interface SysTableMapper extends BaseMapper<SysTable> {
 
     void saveFieldsInfo(SysTableReqVO reqVO);
 
+    /**
+     * 删除表（物理删除）
+     *
+     * @param tableName 表名称
+     */
     void dropTable(@Param("tableName") String tableName);
+
+    /**
+     * 修改表名称
+     *
+     * @param oldName 原名称
+     * @param newName 新名称
+     */
+    void alterTableName(@Param("oldName") String oldName, @Param("newName") String newName);
 }

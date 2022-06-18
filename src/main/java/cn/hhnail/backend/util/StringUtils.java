@@ -25,6 +25,16 @@ public class StringUtils {
         return false;
     }
 
+    /**
+     * 检查字符串非空（null或""）
+     */
+    public static boolean notEmpty(String str) {
+        if (str == null || "".equals(str)) {
+            return false;
+        }
+        return true;
+    }
+
 
     /**
      * 将 int 类型的数组转化为 string 字符串
