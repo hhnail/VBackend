@@ -8,6 +8,8 @@ import cn.hhnail.backend.vo.request.SysTableReqVO;
 import cn.hhnail.backend.vo.response.AppResponse;
 import cn.hhnail.backend.vo.response.SysTableRespVO;
 import com.sun.deploy.ref.AppRef;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/vapi")
 public class SysTableController {
+
+    Logger logger = LoggerFactory.getLogger(SysTableController.class);
 
     @Autowired
     SysTableService sysTableService;
@@ -82,11 +86,11 @@ public class SysTableController {
 
     @PostMapping(value = "/getTableColumns")
     public AppResponse<List<SysColumn>> getTableColumns(
-            // @RequestParam("id") Integer id
+            @RequestParam("id") String id
     ) {
-        // List<SysColumn> columns = sysTableService.getTableColumns(id);
-        // return AppResponse.ok(columns);
-        return null;
+        logger.info("id={}", id);
+        List<SysColumn> columns = sysTableService.getTableColumns(id);
+        return AppResponse.ok(columns);
     }
 
 

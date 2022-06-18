@@ -1,5 +1,8 @@
 package cn.hhnail.backend.bean;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -8,12 +11,15 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- *
+ * 系统字段
  */
 @Data
 @ToString
 public class SysColumn implements Serializable {
 
+        @TableId(type = IdType.AUTO)
+        @ApiModelProperty(value = "编号")
+        private String id;
         @ApiModelProperty(value = "英文名")
         private String name;
         @ApiModelProperty(value = "中文名")
@@ -32,6 +38,7 @@ public class SysColumn implements Serializable {
         @ApiModelProperty(value = "删除标记")
         private Integer deleted;
         // 是否虚拟
+        @TableField(exist = false)
         private Integer virtual;
         // 键
         private String tableKey;
@@ -41,4 +48,6 @@ public class SysColumn implements Serializable {
         private String defaultValue;
         // 备注
         private String remark;
+        @ApiModelProperty(value = "所属表编号")
+        private String sysTableId;
 }
