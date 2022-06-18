@@ -1,6 +1,8 @@
 package cn.hhnail.backend.service.impl;
 
+import cn.hhnail.backend.bean.SysColumn;
 import cn.hhnail.backend.bean.SysTable;
+import cn.hhnail.backend.mapper.SysColumnMapper;
 import cn.hhnail.backend.mapper.SysTableMapper;
 import cn.hhnail.backend.service.SysTableService;
 import cn.hhnail.backend.util.StringUtils;
@@ -18,6 +20,8 @@ public class SysTableServiceImpl implements SysTableService {
 
     @Autowired
     SysTableMapper sysTableMapper;
+    @Autowired
+    SysColumnMapper columnMapper;
 
 
     @Override
@@ -93,5 +97,13 @@ public class SysTableServiceImpl implements SysTableService {
             sysTableMapper.alterTableName(oldName, newName);
         }
 
+    }
+
+    @Override
+    public List<SysColumn> getTableColumns(String id) {
+        QueryWrapper<SysColumn> queryOption = new QueryWrapper<>();
+        queryOption.eq("sys_table_id", id);
+        List<SysColumn> sysColumns = columnMapper.selectList(queryOption);
+        return sysColumns;
     }
 }

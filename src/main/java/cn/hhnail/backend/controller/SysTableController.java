@@ -1,5 +1,6 @@
 package cn.hhnail.backend.controller;
 
+import cn.hhnail.backend.bean.SysColumn;
 import cn.hhnail.backend.bean.SysTable;
 import cn.hhnail.backend.service.SysTableService;
 import cn.hhnail.backend.util.StringUtils;
@@ -10,10 +11,7 @@ import com.sun.deploy.ref.AppRef;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,5 +78,16 @@ public class SysTableController {
         sysTableService.selectTables();
         return AppResponse.ok(null);
     }
+
+
+    @PostMapping(value = "/getTableColumns")
+    public AppResponse<List<SysColumn>> getTableColumns(
+            // @RequestParam("id") Integer id
+    ) {
+        // List<SysColumn> columns = sysTableService.getTableColumns(id);
+        // return AppResponse.ok(columns);
+        return null;
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package cn.hhnail.backend.service;
 
+import cn.hhnail.backend.bean.SysColumn;
 import cn.hhnail.backend.bean.SysTable;
 import cn.hhnail.backend.vo.request.SysTableReqVO;
 
@@ -24,4 +25,6 @@ public interface SysTableService {
     void dropTable(String tableName);
 
     void updateTable(SysTableReqVO reqVO);
+
+    List<SysColumn> getTableColumns(String id);
 }
