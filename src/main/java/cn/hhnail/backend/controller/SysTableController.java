@@ -48,6 +48,12 @@ public class SysTableController {
             if (name == null || StringUtils.isEmpty(name)) {
                 throw new RuntimeException("表英文名不得为空");
             }
+            // 截取两端空格，否则sql会报错
+            reqVO.setName(reqVO.getName().trim());
+            reqVO.getColumns().forEach(column->{
+                column.setName(column.getName().trim());
+            });
+
             sysTableService.createTable(reqVO);
             return AppResponse.ok(null);
         } catch (Exception e) {

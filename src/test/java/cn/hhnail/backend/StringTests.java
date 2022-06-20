@@ -10,6 +10,20 @@ public class StringTests {
 
 	@Test
 	public void test01(){
+
 		System.out.println(null + "");
+
 	}
+
+
+	@Test
+	public void test02(){
+		System.out.print(" test ".trim());
+		System.out.println("test".trim());
+
+		System.out.print(" test ");
+		System.out.print("test".trim());
+	}
+
+
 }

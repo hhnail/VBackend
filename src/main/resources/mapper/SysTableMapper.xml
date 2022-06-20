@@ -59,7 +59,11 @@
         <foreach collection="columns" item="column" close=";" separator=",">
             (
             '${column.name}', '${column.label}',
-            ${column.visible},
+            <choose>
+                <when test="column.visible">${column.visible}</when>
+                <otherwise>0</otherwise>
+            </choose>
+            ,
             ${id}
             )
         </foreach>

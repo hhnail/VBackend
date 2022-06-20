@@ -27,6 +27,8 @@ public class SysTableReqVO implements Serializable {
 
     private String remark;
 
+    // private Integer visible;
+
     // private Integer sysTableId;
 
     private List<SysColumn> columns = new ArrayList<>();
