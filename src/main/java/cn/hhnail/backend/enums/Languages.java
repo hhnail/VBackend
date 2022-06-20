@@ -6,7 +6,7 @@ package cn.hhnail.backend.enums;
  * 语种
  * @Author Hhnail
  */
-public enum Languages {
+public enum Languages implements BaseEnum{
 
     CHINESE("zh", "中文"),
     ENGLISH("en", "英文"),
@@ -26,9 +26,10 @@ public enum Languages {
         return code;
     }
 
+
+    @Override
     public boolean equals(String code){
         return this.getCode().equals(code);
     }
-
 
 }

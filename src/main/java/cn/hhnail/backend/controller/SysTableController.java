@@ -100,4 +100,21 @@ public class SysTableController {
     }
 
 
+    /**
+     * 获取码表
+     * @param type
+     * @return
+     */
+    @PostMapping(value = "/getCodeTable")
+    public AppResponse<List<SysTableRespVO>> getCodeTable(
+            @RequestParam("type") String type
+    ) {
+        logger.info("表类型（单级编码或多级编码）={}", type);
+        List<SysTableRespVO> tables = sysTableService.getCodeTable(type);
+        return AppResponse.ok(tables);
+    }
+
+
+
+
 }

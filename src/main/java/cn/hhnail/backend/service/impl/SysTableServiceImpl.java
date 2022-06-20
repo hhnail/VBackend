@@ -2,17 +2,20 @@ package cn.hhnail.backend.service.impl;
 
 import cn.hhnail.backend.bean.SysColumn;
 import cn.hhnail.backend.bean.SysTable;
+import cn.hhnail.backend.enums.TableType;
 import cn.hhnail.backend.mapper.SysColumnMapper;
 import cn.hhnail.backend.mapper.SysTableMapper;
 import cn.hhnail.backend.service.SysTableService;
 import cn.hhnail.backend.util.StringUtils;
 import cn.hhnail.backend.vo.request.SysTableReqVO;
+import cn.hhnail.backend.vo.response.SysTableRespVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -106,4 +109,24 @@ public class SysTableServiceImpl implements SysTableService {
         List<SysColumn> sysColumns = columnMapper.selectList(queryOption);
         return sysColumns;
     }
+
+    @Override
+    public List<SysTableRespVO> getCodeTable(String type) {
+        List<SysTableRespVO> vos = new ArrayList<>();
+
+        QueryWrapper queryOption = new QueryWrapper();
+        queryOption.eq(TableType.mapDbColumn, type);
+        List<SysTable> list = sysTableMapper.selectList(queryOption);
+        list.forEach(item->{
+           SysTableRespVO respVO = new SysTableRespVO();
+           BeanUtils.copyProperties(item,respVO);
+           vos.add(respVO);
+        });
+
+        // 获取表结构
+        // 获取数据
+
+        return vos;
+    }
+
 }

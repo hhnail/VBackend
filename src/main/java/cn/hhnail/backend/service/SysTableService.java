@@ -3,6 +3,7 @@ package cn.hhnail.backend.service;
 import cn.hhnail.backend.bean.SysColumn;
 import cn.hhnail.backend.bean.SysTable;
 import cn.hhnail.backend.vo.request.SysTableReqVO;
+import cn.hhnail.backend.vo.response.SysTableRespVO;
 
 import java.util.List;
 
@@ -27,4 +28,9 @@ public interface SysTableService {
     void updateTable(SysTableReqVO reqVO);
 
     List<SysColumn> getTableColumns(String id);
+
+    /**
+     * 获取编码表信息
+     */
+    List<SysTableRespVO> getCodeTable(String type);
 }
