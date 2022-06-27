@@ -1,5 +1,8 @@
 package cn.hhnail.backend.enums;
 
+/**
+ * 时间格式化类型
+ */
 public enum DateTemplate {
 
     yyyyMMdd("yyyy-MM-dd"),

@@ -2,11 +2,14 @@ package cn.hhnail.backend.controller;
 
 import cn.hhnail.backend.bean.SysColumn;
 import cn.hhnail.backend.bean.SysTable;
+import cn.hhnail.backend.service.ComService;
 import cn.hhnail.backend.service.SysTableService;
 import cn.hhnail.backend.util.StringUtils;
+import cn.hhnail.backend.vo.request.QueryOption;
 import cn.hhnail.backend.vo.request.SysTableReqVO;
 import cn.hhnail.backend.vo.response.AppResponse;
 import cn.hhnail.backend.vo.response.SysTableRespVO;
+import com.alibaba.fastjson.JSONObject;
 import com.sun.deploy.ref.AppRef;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/vapi")
@@ -24,8 +29,11 @@ public class SysTableController {
 
     Logger logger = LoggerFactory.getLogger(SysTableController.class);
 
+
     @Autowired
     SysTableService sysTableService;
+    @Autowired
+    ComService comService;
 
     @PostMapping(value = "/getTables")
     public List<SysTableRespVO> getTables() {
@@ -50,7 +58,7 @@ public class SysTableController {
             }
             // 截取两端空格，否则sql会报错
             reqVO.setName(reqVO.getName().trim());
-            reqVO.getColumns().forEach(column->{
+            reqVO.getColumns().forEach(column -> {
                 column.setName(column.getName().trim());
             });
 
@@ -102,19 +110,16 @@ public class SysTableController {
 
     /**
      * 获取码表
-     * @param type
-     * @return
      */
     @PostMapping(value = "/getCodeTable")
-    public AppResponse<List<SysTableRespVO>> getCodeTable(
-            @RequestParam("type") String type
-    ) {
-        logger.info("表类型（单级编码或多级编码）={}", type);
-        List<SysTableRespVO> tables = sysTableService.getCodeTable(type);
+    public AppResponse<List<SysTableRespVO>> getCodeTable(@RequestBody QueryOption queryOption) {
+        logger.info("表类型（单级编码或多级编码）={}", queryOption);
+        // String type = params.get("type").toString();
+        // List<SysTableRespVO> tables = sysTableService.getCodeTable(type);
+        // return AppResponse.ok(tables);
+        List<SysTableRespVO> tables = comService.select(queryOption);
         return AppResponse.ok(tables);
     }
-
-
 
 
 }
