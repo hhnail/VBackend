@@ -4,9 +4,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/hhnail
     username: root
-#    longshine密码
-#    password: root
-#    thunder密码
+    #    thunder密码
     password: 123456
 #服务
 sever:
@@ -24,7 +22,9 @@ mybatis:
   type-aliases-package: com.hhnail.backend.bean
   mapper-locations: classpath*:com/**/*Mapper.xml
 
+#第三方api
 third-api:
+  #  百度翻译
   baidu-translate:
     url: https://fanyi-api.baidu.com/api/trans/vip/translate
     APP_ID: 20220515001216767

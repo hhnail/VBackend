@@ -3,6 +3,8 @@ package cn.hhnail.backend.controller;
 import cn.hhnail.backend.bean.Test;
 import cn.hhnail.backend.mapper.DemoMapper;
 import io.swagger.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,9 @@ import java.util.Map;
 @RequestMapping("/vapi")
 @Api(value = "测试控制器", tags = {"测试"})
 public class DemoController {
+
+	Logger logger = LoggerFactory.getLogger(DemoController.class);
+
 
 	@Autowired
 	DemoMapper demoMapper;

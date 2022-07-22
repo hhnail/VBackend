@@ -1,5 +1,10 @@
 package cn.hhnail.backend.mapper;
 
-public interface ComMapper {
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
+public interface ComMapper{
+
+    List<Object> test();
 }

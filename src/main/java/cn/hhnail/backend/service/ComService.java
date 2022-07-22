@@ -11,4 +11,7 @@ public interface ComService {
      * 根据QueryOption查询
      */
     List<SysTableRespVO> select(QueryOption queryOption);
+
+    @Deprecated
+    List<Object> test();
 }
