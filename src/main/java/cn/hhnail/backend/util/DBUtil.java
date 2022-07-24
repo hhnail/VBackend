@@ -2,9 +2,9 @@ package cn.hhnail.backend.util;
 
 import cn.hhnail.backend.enums.CompareMethod;
 import cn.hhnail.backend.enums.ConditionType;
-import cn.hhnail.backend.vo.request.Condition;
-import cn.hhnail.backend.vo.request.Field;
-import cn.hhnail.backend.vo.request.QueryOption;
+import cn.hhnail.backend.bean.Condition;
+import cn.hhnail.backend.bean.Field;
+import cn.hhnail.backend.bean.QueryOption;
 
 import java.sql.*;
 

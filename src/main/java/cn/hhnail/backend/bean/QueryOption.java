@@ -1,14 +1,13 @@
-package cn.hhnail.backend.vo.request;
+package cn.hhnail.backend.bean;
 
 import lombok.Data;
 import lombok.ToString;
-import sun.java2d.pipe.SpanClipRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 查询条件
+ * 封装查询条件
  */
 @Data
 @ToString

@@ -1,4 +1,4 @@
-package cn.hhnail.backend.vo.request;
+package cn.hhnail.backend.bean;
 
 import cn.hhnail.backend.enums.CompareMethod;
 import cn.hhnail.backend.enums.ConditionType;

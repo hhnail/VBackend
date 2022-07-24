@@ -5,12 +5,10 @@ import cn.hhnail.backend.bean.SysTable;
 import cn.hhnail.backend.service.ComService;
 import cn.hhnail.backend.service.SysTableService;
 import cn.hhnail.backend.util.StringUtils;
-import cn.hhnail.backend.vo.request.QueryOption;
+import cn.hhnail.backend.bean.QueryOption;
 import cn.hhnail.backend.vo.request.SysTableReqVO;
 import cn.hhnail.backend.vo.response.AppResponse;
 import cn.hhnail.backend.vo.response.SysTableRespVO;
-import com.alibaba.fastjson.JSONObject;
-import com.sun.deploy.ref.AppRef;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -19,9 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/vapi")

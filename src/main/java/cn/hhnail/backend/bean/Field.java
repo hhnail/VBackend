@@ -1,10 +1,13 @@
-package cn.hhnail.backend.vo.request;
+package cn.hhnail.backend.bean;
 
 import lombok.Data;
 import lombok.ToString;
 
 @Data
 @ToString
+/**
+ * SQL字段
+ */
 public class Field {
 
     public Field(String fieldName) {

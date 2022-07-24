@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 树结构工具类
+ */
 public class TreeNodeUtil {
 
     public static void checkSource(List nodes) {
