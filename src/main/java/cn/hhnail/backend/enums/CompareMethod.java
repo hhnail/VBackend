@@ -18,6 +18,10 @@ public enum CompareMethod implements BaseEnum{
         this.value = value;
     }
 
+    public String getValue(){
+        return this.value;
+    }
+
     @Override
     public boolean equals(String value) {
         return this.value.equals(value);

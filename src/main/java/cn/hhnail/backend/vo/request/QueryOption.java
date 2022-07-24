@@ -20,6 +20,8 @@ public class QueryOption {
     private Integer moduleId;
     // 条件列表
     private List<Condition> conditions = new ArrayList<>();
+    // 字段列表
+    private List<Field> fields = new ArrayList<>();
     // 是否分页
     private Boolean paged;
     // 分页——每页大小
@@ -30,5 +32,34 @@ public class QueryOption {
     private List<String> orderBy;
     //
     private Integer limit;
+
+
+    /**
+     * 添加查询条件
+     *
+     * @param condition
+     */
+    public void addCondition(Condition condition) {
+        this.conditions.add(condition);
+    }
+
+    /**
+     * 添加查询字段
+     *
+     * @param field
+     */
+    public void addField(Field field) {
+        this.fields.add(field);
+    }
+
+
+    public List<Object> getFieldsNameList() {
+        List<Object> names = new ArrayList<>();
+        this.fields.forEach(item -> {
+            names.add(item.getFieldName());
+        });
+        return names;
+    }
+
 
 }

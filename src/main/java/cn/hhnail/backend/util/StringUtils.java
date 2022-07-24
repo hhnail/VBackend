@@ -1,11 +1,13 @@
 package cn.hhnail.backend.util;
 
 import cn.hhnail.backend.enums.DateTemplate;
+import cn.hhnail.backend.vo.request.Field;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Hhnail 字符串工具类
@@ -70,8 +72,15 @@ public class StringUtils {
         }
     }
 
+    /**
+     * 按照模板，将时间类型转化字符串
+     *
+     * @param date
+     * @param template
+     * @return
+     */
     public static String formatDate2String(Date date, DateTemplate template) {
-        if(date == null){
+        if (date == null) {
             return "";
         }
         SimpleDateFormat sdf = new SimpleDateFormat(template.getTemplateString());
@@ -82,5 +91,14 @@ public class StringUtils {
             e.printStackTrace();
             return sdf.format(new Date());
         }
+    }
+
+    public static String groupConcat(List<Object> list, String separator) {
+        StringBuffer sb = new StringBuffer();
+        list.forEach(item -> {
+            sb.append(item.toString());
+            sb.append(separator);
+        });
+        return sb.substring(0, sb.length() - separator.length());
     }
 }
