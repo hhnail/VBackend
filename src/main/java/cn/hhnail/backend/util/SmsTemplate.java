@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * 发送手机短信验证码的模板类
- * @author Administrator
+ * @author 尚硅谷
  *
  */
 @Slf4j

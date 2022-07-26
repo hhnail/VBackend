@@ -33,7 +33,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 /**
  * 发送手机验证码的HttpClient工具类
- * @author Administrator
+ * @author 尚硅谷
  *
  */
 public class HttpUtils {
