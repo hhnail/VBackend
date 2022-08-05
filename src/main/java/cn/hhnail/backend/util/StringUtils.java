@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -92,12 +93,32 @@ public class StringUtils {
         }
     }
 
-    public static String groupConcat(List<Object> list, String separator) {
+    /**
+     * 将list的元素按照separator分隔，拼接为字符串
+     * @param list
+     * @param separator
+     * @return
+     * eg: [123,aaa] --> "123,aaa"
+     */
+    public static String groupConcat(List<String> list, String separator) {
         StringBuffer sb = new StringBuffer();
         list.forEach(item -> {
             sb.append(item.toString());
             sb.append(separator);
         });
         return sb.substring(0, sb.length() - separator.length());
+    }
+
+    /**
+     * 将 List<Object> 转化为 List<String>
+     * @param list
+     * @return
+     */
+    public static List<String> objectList2String(List<Object> list) {
+        List<String> res = new ArrayList<>();
+        list.forEach(item -> {
+            res.add(item.toString());
+        });
+        return res;
     }
 }

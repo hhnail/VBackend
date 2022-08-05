@@ -1,5 +1,6 @@
 package cn.hhnail.backend.bean;
 
+import cn.hhnail.backend.enums.FieldType;
 import lombok.Data;
 import lombok.ToString;
 
@@ -17,6 +18,8 @@ public class Field {
     private String fieldName;
 
     private Object value;
+
+    private FieldType fieldType;
 
 
 }

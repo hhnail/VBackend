@@ -52,8 +52,8 @@ public class QueryOption {
     }
 
 
-    public List<Object> getFieldsNameList() {
-        List<Object> names = new ArrayList<>();
+    public List<String> getFieldsNameList() {
+        List<String> names = new ArrayList<>();
         this.fields.forEach(item -> {
             names.add(item.getFieldName());
         });

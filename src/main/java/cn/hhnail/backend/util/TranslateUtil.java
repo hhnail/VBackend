@@ -50,6 +50,13 @@ public class TranslateUtil {
         return translate(query,Languages.ENGLISH,Languages.CHINESE);
     }
 
+    /**
+     * 翻译
+     * @param query 需要翻译的词
+     * @param from 从xx语言翻译
+     * @param to 翻译成xx语言
+     * @return 翻译的结果
+     */
     public static String translate(String query,Languages from,Languages to) {
         // 加密前的签名
         String beforeSign = APP_ID + query + SALT + APP_KEY;
