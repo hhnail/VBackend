@@ -31,6 +31,12 @@ public class SmsTemplate {
 	
 	@Value("${sms.appcode}")
 	String appcode ;
+
+	public static void main(String[] args) {
+		System.out.println("test @Value");
+		SmsTemplate template = new SmsTemplate();
+		System.out.println(template.host);
+	}
 	
 	public AppResponse<String> sendCode(Map<String, String> querys) {
 		

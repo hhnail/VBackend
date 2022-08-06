@@ -30,4 +30,11 @@ third-api:
     APP_ID: 20220515001216767
     APP_KEY: _AUEiiSMHzx8kyDDr8lf
 
+#短信服务
+sms:
+  host: placeholder
+  path: placeholder
+  method: placeholder
+  appcode: placeholder
+
 
