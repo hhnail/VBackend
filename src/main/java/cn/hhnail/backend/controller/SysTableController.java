@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,7 +110,7 @@ public class SysTableController {
      * 获取码表
      */
     @PostMapping(value = "/getCodeTable")
-    public AppResponse<List<SysTableRespVO>> getCodeTable(@RequestBody QueryOption queryOption) {
+    public AppResponse<List<SysTableRespVO>> getCodeTable(@RequestBody @NotBlank QueryOption queryOption) {
         logger.info("表类型（单级编码或多级编码）={}", queryOption);
         // String type = params.get("type").toString();
         // List<SysTableRespVO> tables = sysTableService.getCodeTable(type);
@@ -122,7 +123,7 @@ public class SysTableController {
      * 添加字段（逻辑、物理）
      */
     @PostMapping(value = "/addField")
-    public AppResponse<List<SysTableRespVO>> addField(@RequestBody SysColumn field) {
+    public AppResponse<List<SysTableRespVO>> addField(@RequestBody @NotBlank SysColumn field) {
         try {
             logger.info("添加字段={}", field);
             comService.addField(field);
