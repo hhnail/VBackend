@@ -6,6 +6,7 @@ import cn.hhnail.backend.enums.ConditionType;
 import cn.hhnail.backend.bean.Condition;
 import cn.hhnail.backend.bean.Field;
 import cn.hhnail.backend.bean.QueryOption;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ import java.util.Map;
  */
 @Component
 @Slf4j
+@Data
 public class DBUtil {
 
     // @Value("${spring.datasource.driver-class-name}")
@@ -31,6 +33,9 @@ public class DBUtil {
     static final String DB_URL = "jdbc:mysql://localhost:3306/hhnail";
     static final String USER = "root";
     static final String PASSWORD = "123456";
+
+    private Connection conn = null;
+    private Statement stmt = null;
 
     public static void main(String[] args) {
         QueryOption queryOption = new QueryOption();
@@ -45,20 +50,55 @@ public class DBUtil {
         System.out.println(execute);
     }
 
+
     /**
-     * 执行
+     * 获取数据库连接
+     */
+    public Connection getConnection() throws Exception {
+        if (conn != null) {
+            return conn;
+        }
+        Class.forName(JDBC_DRIVER);
+        return DriverManager.getConnection(DB_URL, USER, PASSWORD);
+    }
+
+    /**
+     * 关闭数据库连接
+     */
+    private void closeConnection(Connection conn) {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 关闭SQL执行对象
+     */
+    private void closeStatement(Statement stmt) {
+        try {
+            if (stmt != null) {
+                stmt.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 执行查询
+     * 需要返回结果集
      */
     public List<Map<String, Object>> execute(QueryOption queryOption) {
 
         List<Map<String, Object>> result = new ArrayList<>();
         StringBuffer sql = new StringBuffer();
 
-        Connection conn = null;
-        Statement stmt = null;
-
         try {
-            Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            conn = getConnection();
             stmt = conn.createStatement();
             // 拼接查询字段
             sql.append("select ");
@@ -99,27 +139,13 @@ public class DBUtil {
             }
             // 完成后关闭
             rs.close();
-            stmt.close();
-            conn.close();
             return result;
-        } catch (SQLException se) {
-            // 处理 JDBC 错误
-            se.printStackTrace();
         } catch (Exception e) {
-            // 处理 Class.forName 错误
             e.printStackTrace();
         } finally {
             // 关闭资源
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
+            closeConnection(conn);
+            closeStatement(stmt);
         }
 
         // 报错统一返回结果
@@ -128,5 +154,27 @@ public class DBUtil {
         errorMsg.put("sql", sql);
         result.add(errorMsg);
         return result;
+    }
+
+    /**
+     * 执行insert、delete、update
+     * 无需返回结果集
+     */
+    public void executeNoResult(String sql) {
+
+
+        try {
+            conn = getConnection();
+            stmt = conn.createStatement();
+            // 执行
+            System.out.println(String.format("execute final sql:【%s】", sql));
+            stmt.execute(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // 关闭资源
+            closeConnection(conn);
+            closeStatement(stmt);
+        }
     }
 }
