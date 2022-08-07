@@ -1,5 +1,6 @@
 package cn.hhnail.backend.controller;
 
+import cn.hhnail.backend.bean.Field;
 import cn.hhnail.backend.bean.SysColumn;
 import cn.hhnail.backend.bean.SysTable;
 import cn.hhnail.backend.service.ComService;
@@ -115,6 +116,20 @@ public class SysTableController {
         // return AppResponse.ok(tables);
         List<SysTableRespVO> tables = comService.select(queryOption);
         return AppResponse.ok(tables);
+    }
+
+    /**
+     * 添加字段（逻辑、物理）
+     */
+    @PostMapping(value = "/addField")
+    public AppResponse<List<SysTableRespVO>> addField(@RequestBody SysColumn field) {
+        try {
+            logger.info("添加字段={}", field);
+            comService.addField(field);
+            return AppResponse.ok(null);
+        } catch (Exception e) {
+            return AppResponse.fail();
+        }
     }
 
 

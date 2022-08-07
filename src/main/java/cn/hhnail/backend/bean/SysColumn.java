@@ -50,4 +50,6 @@ public class SysColumn implements Serializable {
         private String remark;
         @ApiModelProperty(value = "所属表编号")
         private String sysTableId;
+        @TableField(exist = false)
+        private String sysTableName;
 }

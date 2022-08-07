@@ -3,6 +3,44 @@
 <mapper namespace="cn.hhnail.backend.mapper.ComMapper">
     <!-- id对应接口方法名 -->
     <select id="test" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-        select * from sys_table
+        select *
+        from sys_table
     </select>
+
+    <!-- 添加物理字段 -->
+    <update id="addPhysicsField">
+        alter table ${sysTableName} add `${name}` ${type}(${length});
+    </update>
+
+    <!-- 添加逻辑字段 -->
+    <insert id="addLogicalField" parameterType="cn.hhnail.backend.bean.SysColumn">
+        INSERT INTO `sys_column` (`id`,
+                                  `label`,
+                                  `name`,
+                                  `visible`,
+                                  `type`,
+                                  `length`,
+                                  `accuracy`,
+                                  `nullable`,
+                                  `table_key`,
+                                  `default_value`,
+                                  `auto_increment`,
+                                  `virtual`,
+                                  `remark`,
+                                  `sys_table_id`)
+        VALUES (NULL,
+                #{label},
+                #{name},
+                #{visible},
+                #{type},
+                #{length},
+                #{accuracy},
+                #{nullable},
+                #{tableKey},
+                #{defaultValue},
+                #{autoIncrement},
+                #{virtual},
+                #{remark},
+                #{sysTableId});
+    </insert>
 </mapper>
