@@ -38,16 +38,16 @@ public class DBUtil {
     private Statement stmt = null;
 
     public static void main(String[] args) {
-        QueryOption queryOption = new QueryOption();
-        queryOption.setPrimaryTable("sys_table");
-        queryOption.addField(new Field("id"));
-        queryOption.addField(new Field("name"));
-        queryOption.addField(new Field("label"));
-        queryOption.addCondition(new Condition(ConditionType.AND, "deleted", 0, CompareMethod.EQUAL));
-
-        DBUtil db = new DBUtil();
-        List<Map<String, Object>> execute = db.execute(queryOption);
-        System.out.println(execute);
+        // QueryOption queryOption = new QueryOption();
+        // queryOption.setPrimaryTable("sys_table");
+        // queryOption.addField(new Field("id"));
+        // queryOption.addField(new Field("name"));
+        // queryOption.addField(new Field("label"));
+        // queryOption.addCondition(new Condition(ConditionType.AND, "deleted", 0, CompareMethod.EQUAL));
+        //
+        // DBUtil db = new DBUtil();
+        // List<Map<String, Object>> execute = db.execute(queryOption);
+        // System.out.println(execute);
     }
 
 
@@ -122,6 +122,7 @@ public class DBUtil {
                     sql.append(")");
                 }
             });
+            // TODO order by、limit、page...
             sql.append(";");
             // 执行查询
             System.out.println(String.format("execute by queryoption final sql:【%s】", sql));
