@@ -52,6 +52,7 @@ public class DemoController {
     @GetMapping("/testRedis")
     public void testRedis() {
         redisTemplate.opsForValue().set("user1", "zhangsan");
+        // I am hhnail in Robam
     }
 
 
