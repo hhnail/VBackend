@@ -1,4 +1,4 @@
-package cn.hhnail.backend.bean;
+package cn.hhnail.backend.controller;
 
 import cn.hhnail.backend.vo.response.AppResponse;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
