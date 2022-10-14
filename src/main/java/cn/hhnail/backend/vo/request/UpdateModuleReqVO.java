@@ -3,6 +3,9 @@ package cn.hhnail.backend.vo.request;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * 新增、更新模块信息VO
+ */
 @Data
 @ToString
 public class UpdateModuleReqVO {
@@ -18,6 +21,8 @@ public class UpdateModuleReqVO {
 	private String routingAddress;
 
 	private Integer orderId;
+
+	private Integer moduleId;
 
 	private Integer pid;
 }

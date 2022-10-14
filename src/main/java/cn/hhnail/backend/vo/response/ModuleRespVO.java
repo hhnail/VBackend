@@ -21,6 +21,8 @@ public class ModuleRespVO {
 
 	private Integer pid;
 
+	private Integer moduleId;
+
 	private List<ModuleRespVO> children = null;
 
 }

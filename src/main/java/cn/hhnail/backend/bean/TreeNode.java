@@ -48,9 +48,11 @@ public class TreeNode {
 	@TableField(fill = FieldFill.INSERT_UPDATE)
 	private String orderId;
 
+	@TableField(fill = FieldFill.INSERT_UPDATE)
+	private Integer moduleId;
+
 	@ApiModelProperty(value = "子节点集合")
-	// 不是数据库字段
-	@TableField(exist = false)
+	@TableField(exist = false) // 不是数据库字段
 	private List<TreeNode> children = new ArrayList<>();
 
 
