@@ -4,7 +4,10 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/hhnail
     username: root
-    password: root
+#    thunder password
+    password: 123456
+#    default password
+#    password: root
   redis:
     database: 0
     host: localhost
@@ -13,7 +16,6 @@ spring:
       pool:
         max-active: 8
         max-wait: -1
-#服务
 mybatis-plus:
   configuration:
     #    mybatis日志（查看数据流、最终的sql等）
@@ -21,6 +23,7 @@ mybatis-plus:
     #    驼峰命名自动映射   eg：userName —> user_name
     map-underscore-to-camel-case: true
 #    mapper-location: mapper/*.xml
+#服务
 server:
 #  端口号
   port: 7777
