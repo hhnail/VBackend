@@ -1,10 +1,12 @@
 package cn.hhnail.backend.vo.request;
 
+import cn.hhnail.backend.vo.response.AntdTableColumn;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -12,11 +14,16 @@ import java.util.Map;
 @AllArgsConstructor
 public class FreeReportReqVO implements Serializable {
 
+    // 报表名称
     private String reportName;
-    private String moduleId ;
+    // 所属模块id
+    private Integer moduleId ;
+    // 描述
     private String description ;
+    // 报表SQL
     private String reportSql;
-    private Map<String,Object> columnMap;
+    // 显示字段
+    private List<AntdTableColumn> columnsView;
 
 
 }

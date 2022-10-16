@@ -21,7 +21,6 @@ import static cn.hhnail.backend.enums.TreeNodeType.*;
 @Service
 public class TreeNodeServiceImpl implements TreeNodeService {
 
-
 	Logger logger = LoggerFactory.getLogger(TreeNodeServiceImpl.class);
 
 	@Autowired
