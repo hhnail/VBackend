@@ -51,7 +51,7 @@ public class FreeReportController {
         return AppResponse.ok(null);
     }
 
-    @GetMapping("/getFreeReport")
+    @PostMapping("/getFreeReport")
     public AppResponse<FreeReportRespVO> getFreeReport(@RequestParam String id) {
         FreeReportRespVO respVO = freeReportService.getFreeReport(id);
         return AppResponse.ok(respVO);
