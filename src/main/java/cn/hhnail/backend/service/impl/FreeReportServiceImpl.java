@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class FreeReportServiceImpl implements FreeReportService {
@@ -33,13 +35,26 @@ public class FreeReportServiceImpl implements FreeReportService {
     @Override
     public FreeReportRespVO getFreeReport(String id) {
         FreeReport dObj = freeReportMapper.selectById(id);
+        if (dObj == null) {
+            throw new RuntimeException(String.format("对应id：【%s】记录不存在"));
+        }
         List<AntdTableColumn> tableColumns = JSONObject.parseArray(dObj.getColumnsView(), AntdTableColumn.class);
 
 
+        // 列规则
         FreeReportRespVO result = new FreeReportRespVO();
         BeanUtils.copyProperties(dObj, result);
         result.setReportName(dObj.getName());
         result.setViewColumns(tableColumns);
+
+        // 数据
+        Map<String,Object> queryMap = new HashMap<>();
+        queryMap.put("primaryTable", "sys_table");
+        queryMap.put("queryColumns", tableColumns);
+        queryMap.put("conditions", null);
+        // List<Map<String,Object>> data0 = freeReportMapper.test();
+        Map<String,Object> data = freeReportMapper.queryByMap(queryMap);
+        result.getViewData().add(data);
 
         return result;
     }

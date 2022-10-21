@@ -5,9 +5,9 @@ spring:
     url: jdbc:mysql://localhost:3306/hhnail
     username: root
 #    雷神笔记本
-#    password: 123456
+    password: 123456
 #    默认密码
-    password: root
+#    password: root
   redis:
     database: 0
     host: localhost

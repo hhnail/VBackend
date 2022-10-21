@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hhnail.backend.mapper.FreeReportMapper">
+
+    <!-- 测试mybatits -->
+    <select id="test" parameterType="hashmap" resultType="Map">
+        select * from sys_table
+    </select>
+
+    <!-- 查询报表 -->
+    <select id="queryByMap" parameterType="hashmap" resultType="hashmap">
+        select
+        <trim prefix="(" suffix=")">
+            <if test="queryColumns!=null and queryColumns.size() > 0">
+
+            </if>
+            <foreach collection="queryColumns" item="column">
+                #{column.dataIndex},
+            </foreach>
+        </trim>
+        from
+        #{primaryTable}
+        <where>
+            <if test="conditions != null and conditions.size() > 0">
+
+            </if>
+        </where>
+    </select>
+</mapper>

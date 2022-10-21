@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 @ToString
-public class AntdTableColumn implements Serializable {
+public class AntdTableColumn implements Serializable, VColumnRule {
 
     private String title;
 
