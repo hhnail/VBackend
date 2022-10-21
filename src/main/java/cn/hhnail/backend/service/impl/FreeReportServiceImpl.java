@@ -33,10 +33,12 @@ public class FreeReportServiceImpl implements FreeReportService {
     @Override
     public FreeReportRespVO getFreeReport(String id) {
         FreeReport dObj = freeReportMapper.selectById(id);
+        List<AntdTableColumn> tableColumns = JSONObject.parseArray(dObj.getColumnsView(), AntdTableColumn.class);
+
+
         FreeReportRespVO result = new FreeReportRespVO();
         BeanUtils.copyProperties(dObj, result);
         result.setReportName(dObj.getName());
-        List<AntdTableColumn> tableColumns = JSONObject.parseArray(dObj.getColumnsView(), AntdTableColumn.class);
         result.setViewColumns(tableColumns);
 
         return result;

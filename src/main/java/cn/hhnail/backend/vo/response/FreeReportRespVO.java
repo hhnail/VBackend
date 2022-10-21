@@ -5,6 +5,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 自由报表——响应VO
@@ -12,6 +13,8 @@ import java.util.List;
 @Data
 @ToString
 public class FreeReportRespVO implements Serializable {
+
+    private String id;
 
     private String reportName;
 
@@ -22,6 +25,7 @@ public class FreeReportRespVO implements Serializable {
     private String reportSql;
 
     private List<AntdTableColumn> viewColumns;
+    private List<Map<String, Object>> viewData;
 
     // private List<AntdTableData> viewData;
 
