@@ -14,7 +14,7 @@ public interface FreeReportMapper extends BaseMapper<FreeReport> {
     List<Map<String,Object>> test();
 
     /**
-     *
+     * 根据map动态查询字段
      */
     List<Map<String,Object>> queryByMap(Map<String, Object> queryMap);
 
