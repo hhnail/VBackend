@@ -49,7 +49,7 @@ public class FreeReportServiceImpl implements FreeReportService {
 
         // 数据
         Map<String,Object> queryMap = new HashMap<>();
-        queryMap.put("primaryTable", "sys_table");
+        queryMap.put("primaryTable", dObj.getPrimaryTable());
         queryMap.put("queryColumns", tableColumns);
         queryMap.put("conditions", null);
         // List<Map<String,Object>> data0 = freeReportMapper.test();

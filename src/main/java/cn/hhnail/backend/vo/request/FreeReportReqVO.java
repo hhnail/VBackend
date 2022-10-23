@@ -14,16 +14,11 @@ import java.util.Map;
 @AllArgsConstructor
 public class FreeReportReqVO implements Serializable {
 
-    // 报表名称
-    private String reportName;
-    // 所属模块id
-    private Integer moduleId ;
-    // 描述
-    private String description ;
-    // 报表SQL
-    private String reportSql;
-    // 显示字段
-    private List<AntdTableColumn> columnsView;
-
+    private String reportName; // 报表名称
+    private Integer moduleId ; // 所属模块id
+    private String description ; // 描述
+    private String reportSql; // 报表SQL
+    private String primaryTable; // 主表
+    private List<AntdTableColumn> columnsView; // 显示字段
 
 }

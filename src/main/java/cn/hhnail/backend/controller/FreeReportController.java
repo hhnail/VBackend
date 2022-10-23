@@ -1,7 +1,9 @@
 package cn.hhnail.backend.controller;
 
+import cn.hhnail.backend.enums.SystemMessage;
 import cn.hhnail.backend.enums.SystemVariable;
 import cn.hhnail.backend.service.FreeReportService;
+import cn.hhnail.backend.util.VStringUtil;
 import cn.hhnail.backend.vo.request.FreeReportReqVO;
 import cn.hhnail.backend.vo.response.AntdTableColumn;
 import cn.hhnail.backend.vo.response.AppResponse;
@@ -12,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/vapi")
@@ -32,6 +31,21 @@ public class FreeReportController {
         Integer moduleId = params.getInteger("moduleId");
         String description = params.getString("description");
         String reportSql = params.getString("reportSql");
+        String primaryTable = "";
+        // 通过sql解析主表
+        String[] sqlFragment = reportSql.split(" ");
+        for (int i = 0; i < sqlFragment.length; i++) {
+            if ("from".equals(sqlFragment[i])) {
+                primaryTable = sqlFragment[i + 1];
+            }
+        }
+
+        // 参数校验
+        if (VStringUtil.isEmpty(primaryTable)) {
+            throw new RuntimeException(SystemMessage.PRIMARY_TABLE_CAN_NOT_NULL.getMessage());
+        }
+
+        // 解析字段
         int size = params.size();
         int columnMapSize = (size - 4) / 2;
         List<AntdTableColumn> columnsView = new ArrayList<>();
@@ -44,7 +58,14 @@ public class FreeReportController {
             column.setTitle(columnLabel);
             columnsView.add(column);
         }
-        FreeReportReqVO vo = new FreeReportReqVO(reportName, moduleId, description, reportSql, columnsView);
+        FreeReportReqVO vo = new FreeReportReqVO(
+                reportName,
+                moduleId,
+                description,
+                reportSql,
+                primaryTable,
+                columnsView
+        );
         // 2、xxxx
         freeReportService.saveFreeReport(vo);
         // 3、xxxx

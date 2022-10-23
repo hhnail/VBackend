@@ -1,8 +1,13 @@
 package cn.hhnail.backend.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * 系统全局变量
  */
+@Getter
+@AllArgsConstructor
 public enum SystemVariable {
 
     COLUMN_NAME_PREFIX("free_column_name_"),
@@ -10,16 +15,4 @@ public enum SystemVariable {
 
     private String code;
 
-    private SystemVariable(String code) {
-        this.code = code;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    // @Override
-    // public String toString(){
-    //     return this.getCode();
-    // }
 }
