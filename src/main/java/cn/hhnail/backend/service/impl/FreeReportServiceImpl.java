@@ -53,8 +53,8 @@ public class FreeReportServiceImpl implements FreeReportService {
         queryMap.put("queryColumns", tableColumns);
         queryMap.put("conditions", null);
         // List<Map<String,Object>> data0 = freeReportMapper.test();
-        Map<String,Object> data = freeReportMapper.queryByMap(queryMap);
-        result.getViewData().add(data);
+        List<Map<String,Object>> data = freeReportMapper.queryByMap(queryMap);
+        result.setViewData(data);
 
         return result;
     }

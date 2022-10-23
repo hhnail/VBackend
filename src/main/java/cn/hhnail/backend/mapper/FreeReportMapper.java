@@ -16,7 +16,7 @@ public interface FreeReportMapper extends BaseMapper<FreeReport> {
     /**
      *
      */
-    Map<String, Object> queryByMap(Map<String, Object> queryMap);
+    List<Map<String,Object>> queryByMap(Map<String, Object> queryMap);
 
 
 }

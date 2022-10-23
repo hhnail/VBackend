@@ -4,25 +4,24 @@
 
     <!-- 测试mybatits -->
     <select id="test" parameterType="hashmap" resultType="Map">
-        select * from sys_table
+        select *
+        from sys_table
     </select>
 
     <!-- 查询报表 -->
-    <select id="queryByMap" parameterType="hashmap" resultType="hashmap">
+    <select id="queryByMap" parameterType="hashmap" resultType="Map">
         select
-        <trim prefix="(" suffix=")">
-            <if test="queryColumns!=null and queryColumns.size() > 0">
-
-            </if>
-            <foreach collection="queryColumns" item="column">
-                #{column.dataIndex},
+        <if test="queryColumns!=null and queryColumns.size() > 0">
+            <foreach collection="queryColumns" item="column" separator=",">
+                ${column.dataIndex}
             </foreach>
-        </trim>
-        from
-        #{primaryTable}
+        </if>
+        from ${primaryTable}
         <where>
             <if test="conditions != null and conditions.size() > 0">
+                <foreach collection="conditions" item="condition">
 
+                </foreach>
             </if>
         </where>
     </select>
