@@ -1,7 +1,9 @@
 package cn.hhnail.backend.bean;
 
 import cn.hhnail.backend.vo.response.AntdTableColumn;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.models.auth.In;
 import lombok.Data;
@@ -15,6 +17,7 @@ import java.util.List;
 public class FreeReport implements Serializable {
 
     @ApiModelProperty(value = "ID")
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty(value = "名称")
