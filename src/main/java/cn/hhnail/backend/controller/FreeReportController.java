@@ -1,5 +1,6 @@
 package cn.hhnail.backend.controller;
 
+import cn.hhnail.backend.enums.ResponseCodeEnum;
 import cn.hhnail.backend.enums.SystemMessage;
 import cn.hhnail.backend.enums.SystemVariable;
 import cn.hhnail.backend.service.FreeReportService;
@@ -82,6 +83,18 @@ public class FreeReportController {
     public AppResponse<FreeReportRespVO> getFreeReport(@RequestParam String id) {
         FreeReportRespVO respVO = freeReportService.getFreeReport(id);
         return AppResponse.ok(respVO);
+    }
+
+    @PostMapping("/deleteFreeReportById")
+    public AppResponse<String> deleteFreeReportById(@RequestParam String id) {
+        AppResponse<String> resp = new AppResponse<>();
+        try{
+            freeReportService.deleteFreeReportById(id);
+            resp.setMsg(SystemMessage.DELETE_SUCCESS.getMessage());
+        }catch (Exception e){
+            resp.setMsg(SystemMessage.DELETE_FAIL.getMessage());
+        }
+        return resp;
     }
 
 }

@@ -80,4 +80,9 @@ public class FreeReportServiceImpl implements FreeReportService {
         });
         return respVOList;
     }
+
+    @Override
+    public void deleteFreeReportById(String id) {
+        freeReportMapper.deleteById(id);
+    }
 }

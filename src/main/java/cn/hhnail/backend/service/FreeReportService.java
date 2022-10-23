@@ -13,4 +13,6 @@ public interface FreeReportService {
     FreeReportRespVO getFreeReport(String id);
 
     List<FreeReportRespVO> getFreeReportList();
+
+    void deleteFreeReportById(String id);
 }
