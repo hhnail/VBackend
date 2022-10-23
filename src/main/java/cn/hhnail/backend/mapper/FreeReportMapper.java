@@ -1,6 +1,7 @@
 package cn.hhnail.backend.mapper;
 
 import cn.hhnail.backend.bean.FreeReport;
+import cn.hhnail.backend.vo.request.VQueryRule;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
@@ -18,5 +19,8 @@ public interface FreeReportMapper extends BaseMapper<FreeReport> {
      */
     List<Map<String,Object>> queryByMap(Map<String, Object> queryMap);
 
-
+    /**
+     * 根据【查询规则】动态查询字段
+     */
+    List<Map<String, Object>> queryByQueryRule(VQueryRule query);
 }

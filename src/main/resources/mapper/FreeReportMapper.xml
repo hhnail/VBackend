@@ -25,4 +25,21 @@
             </if>
         </where>
     </select>
+
+    <select id="queryByQueryRule" parameterType="cn.hhnail.backend.vo.request.VQueryRule" resultType="Map">
+        select
+        <if test="queryColumns!=null and queryColumns.size() > 0">
+            <foreach collection="queryColumns" item="column" separator=",">
+                ${column.dataIndex}
+            </foreach>
+        </if>
+        from ${primaryTable}
+        <where>
+            <if test="conditions != null and conditions.size() > 0">
+                <foreach collection="conditions" item="condition">
+
+                </foreach>
+            </if>
+        </where>
+    </select>
 </mapper>

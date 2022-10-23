@@ -1,10 +1,12 @@
 package cn.hhnail.backend.vo.response;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 
 @Data
-public class AntdTableData implements Serializable {
+@ToString
+public class VCondition implements Serializable {
 
 }

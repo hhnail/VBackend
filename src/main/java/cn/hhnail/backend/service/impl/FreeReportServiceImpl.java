@@ -2,18 +2,16 @@ package cn.hhnail.backend.service.impl;
 
 import cn.hhnail.backend.bean.FreeReport;
 import cn.hhnail.backend.mapper.FreeReportMapper;
-import cn.hhnail.backend.mapstruct.FreeReportAdapter;
 import cn.hhnail.backend.service.FreeReportService;
 import cn.hhnail.backend.vo.request.FreeReportReqVO;
 import cn.hhnail.backend.vo.response.AntdTableColumn;
 import cn.hhnail.backend.vo.response.FreeReportRespVO;
+import cn.hhnail.backend.vo.request.VQueryRule;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,18 +42,23 @@ public class FreeReportServiceImpl implements FreeReportService {
         // 列规则
         FreeReportRespVO result = new FreeReportRespVO();
         BeanUtils.copyProperties(dObj, result);
-        result.setReportName(dObj.getName());
-        result.setViewColumns(tableColumns);
+
 
         // 数据
-        Map<String,Object> queryMap = new HashMap<>();
-        queryMap.put("primaryTable", dObj.getPrimaryTable());
-        queryMap.put("queryColumns", tableColumns);
-        queryMap.put("conditions", null);
-        // List<Map<String,Object>> data0 = freeReportMapper.test();
-        List<Map<String,Object>> data = freeReportMapper.queryByMap(queryMap);
-        result.setViewData(data);
+        // Map<String,Object> queryMap = new HashMap<>();
+        // queryMap.put("primaryTable", dObj.getPrimaryTable());
+        // queryMap.put("queryColumns", tableColumns);
+        // queryMap.put("conditions", null);
+        // List<Map<String,Object>> data = freeReportMapper.queryByMap(queryMap);
 
+        VQueryRule query = new VQueryRule();
+        query.setSql(dObj.getReportSql());
+        query.setQueryColumns(tableColumns);
+        List<Map<String,Object>> data = freeReportMapper.queryByQueryRule(query);
+
+        result.setReportName(dObj.getName());
+        result.setViewColumns(tableColumns);
+        result.setViewData(data);
         return result;
     }
 }
