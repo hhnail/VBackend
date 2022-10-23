@@ -8,10 +8,13 @@ import cn.hhnail.backend.vo.response.AntdTableColumn;
 import cn.hhnail.backend.vo.response.FreeReportRespVO;
 import cn.hhnail.backend.vo.request.VQueryRule;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -60,5 +63,21 @@ public class FreeReportServiceImpl implements FreeReportService {
         result.setViewColumns(tableColumns);
         result.setViewData(data);
         return result;
+    }
+
+    @Override
+    public List<FreeReportRespVO> getFreeReportList() {
+        QueryWrapper<FreeReport> wrapper = new QueryWrapper<>();
+        wrapper.eq("deleted",0);
+        List<FreeReport> freeReports = freeReportMapper.selectList(wrapper);
+
+        List<FreeReportRespVO> respVOList = new ArrayList<>();
+        freeReports.forEach(item->{
+            FreeReportRespVO vo = new FreeReportRespVO();
+            BeanUtils.copyProperties(item,vo);
+            vo.setReportName(item.getName());
+            respVOList.add(vo);
+        });
+        return respVOList;
     }
 }

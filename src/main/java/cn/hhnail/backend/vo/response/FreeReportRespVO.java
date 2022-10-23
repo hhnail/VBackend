@@ -14,7 +14,7 @@ import java.util.Map;
 @ToString
 public class FreeReportRespVO implements Serializable {
 
-    private String id;
+    private Integer id;
 
     private String reportName;
 

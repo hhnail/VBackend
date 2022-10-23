@@ -23,6 +23,12 @@ public class FreeReportController {
     @Autowired
     FreeReportService freeReportService;
 
+    @PostMapping("/getFreeReportList")
+    public AppResponse<List<FreeReportRespVO>> getFreeReportList() {
+        List<FreeReportRespVO> voList = freeReportService.getFreeReportList();
+        return AppResponse.ok(voList);
+    }
+
     @PostMapping("/saveFreeReport")
     public AppResponse<String> saveFreeReport(@RequestBody Map<String, Object> paramMap) {
         // 1、解析参数
