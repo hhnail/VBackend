@@ -60,8 +60,9 @@ public class FreeReportController {
             AntdTableColumn column = new AntdTableColumn();
             String columnName = params.getString(SystemVariable.COLUMN_NAME_PREFIX.getCode() + i);
             String columnLabel = params.getString(SystemVariable.COLUMN_LABEL_PREFIX.getCode() + i);
-            column.setKey(columnName);
-            column.setDataIndex(columnName);
+            column.setKey(SystemVariable.COLUMN_UNITE_PREFIX.getCode() + columnName);
+            column.setDataIndex(SystemVariable.COLUMN_UNITE_PREFIX.getCode() + columnName);
+            column.setColumnCode(columnName);
             column.setTitle(columnLabel);
             columnsView.add(column);
         }
@@ -88,10 +89,10 @@ public class FreeReportController {
     @PostMapping("/deleteFreeReportById")
     public AppResponse<String> deleteFreeReportById(@RequestParam String id) {
         AppResponse<String> resp = new AppResponse<>();
-        try{
+        try {
             freeReportService.deleteFreeReportById(id);
             resp.setMsg(SystemMessage.DELETE_SUCCESS.getMessage());
-        }catch (Exception e){
+        } catch (Exception e) {
             resp.setMsg(SystemMessage.DELETE_FAIL.getMessage());
         }
         return resp;

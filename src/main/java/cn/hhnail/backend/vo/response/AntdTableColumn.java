@@ -13,6 +13,8 @@ public class AntdTableColumn implements Serializable {
 
     private String dataIndex;
 
+    private String columnCode;
+
     private String key;
 
     private Integer width;

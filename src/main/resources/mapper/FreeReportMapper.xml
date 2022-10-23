@@ -30,7 +30,7 @@
         select
         <if test="queryColumns!=null and queryColumns.size() > 0">
             <foreach collection="queryColumns" item="column" separator=",">
-                ${column.dataIndex}
+                ${column.columnCode} as v_${column.columnCode}
             </foreach>
         </if>
         from ${primaryTable}

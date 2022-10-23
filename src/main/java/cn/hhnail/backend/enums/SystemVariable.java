@@ -11,7 +11,9 @@ import lombok.Getter;
 public enum SystemVariable {
 
     COLUMN_NAME_PREFIX("free_column_name_"),
-    COLUMN_LABEL_PREFIX("free_column_label_");
+    COLUMN_LABEL_PREFIX("free_column_label_"),
+    COLUMN_UNITE_PREFIX("v_"),
+    ;
 
     private String code;
 
