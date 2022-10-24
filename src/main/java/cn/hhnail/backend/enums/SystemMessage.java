@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
+@AllArgsConstructor // 全参构造
 public enum SystemMessage {
 
     PRIMARY_TABLE_CAN_NOT_NULL("主表不得为空", 500, "primary table can not be null"),

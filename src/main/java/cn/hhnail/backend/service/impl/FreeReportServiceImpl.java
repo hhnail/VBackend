@@ -4,11 +4,10 @@ import cn.hhnail.backend.bean.FreeReport;
 import cn.hhnail.backend.mapper.FreeReportMapper;
 import cn.hhnail.backend.service.FreeReportService;
 import cn.hhnail.backend.vo.request.FreeReportReqVO;
+import cn.hhnail.backend.vo.request.VQueryRule;
 import cn.hhnail.backend.vo.response.AntdTableColumn;
 import cn.hhnail.backend.vo.response.FreeReportRespVO;
-import cn.hhnail.backend.vo.request.VQueryRule;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,7 @@ public class FreeReportServiceImpl implements FreeReportService {
         BeanUtils.copyProperties(vo, entity);
         entity.setName(vo.getReportName());
         entity.setColumnsView(JSONObject.toJSONString(vo.getColumnsView()));
+        entity.setDeleted(0);
         freeReportMapper.insert(entity);
     }
 

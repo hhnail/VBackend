@@ -1,16 +1,12 @@
 package cn.hhnail.backend.bean;
 
-import cn.hhnail.backend.vo.response.AntdTableColumn;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.models.auth.In;
 import lombok.Data;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @ToString
@@ -42,5 +38,5 @@ public class FreeReport implements Serializable {
     private String columnsQuery;
 
     @ApiModelProperty(value = "删除标记")
-    private Integer deleted;
+    private Integer deleted = 0;
 }
