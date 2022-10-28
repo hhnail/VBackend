@@ -1,4 +1,7 @@
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   #  数据库
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,6 +19,7 @@ spring:
       pool:
         max-active: 8
         max-wait: -1
+
 mybatis-plus:
   configuration:
     #    mybatis日志（查看数据流、最终的sql等）
@@ -26,5 +30,6 @@ mybatis-plus:
 #服务
 server:
 #  端口号
-  port: 7777
+  port: 18080
+
 
