@@ -26,5 +26,5 @@ mybatis-plus:
 #服务
 server:
 #  端口号
-  port: 7777
+  port: 18080
 
