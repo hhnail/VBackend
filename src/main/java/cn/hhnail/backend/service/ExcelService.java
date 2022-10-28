@@ -1,4 +1,7 @@
 package cn.hhnail.backend.service;
 
-public interface ExcelService extends FileService{
+public interface ExcelService
+        extends FileService
+{
+
 }
