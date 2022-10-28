@@ -7,6 +7,8 @@ public class DemoTest {
     @Test
     public void simpleRead() {
         String fileName = "D:\\" + "test.xlsx";
-        EasyExcel.read(fileName,DemoData.class,new DemoDataListener()).sheet().doRead();
+        EasyExcel.read(fileName, DemoData.class, new DemoDataListener())
+                .sheet()
+                .doRead();
     }
 }

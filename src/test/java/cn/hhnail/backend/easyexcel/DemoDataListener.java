@@ -2,7 +2,6 @@ package cn.hhnail.backend.easyexcel;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
-import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -14,12 +13,19 @@ public class DemoDataListener extends AnalysisEventListener<DemoData> {
     /**
      * 批处理阈值
      */
-    private static final int BATCH_COUNT = 2;
+    private static final int BATCH_COUNT = 10;
     List<DemoData> list = new ArrayList<>(BATCH_COUNT);
 
+    /**
+     * 调用读取data
+     *
+     * @param data
+     * @param analysisContext
+     */
     @Override
     public void invoke(DemoData data, AnalysisContext analysisContext) {
-        log.info("解析到一条数据:{}", JSON.toJSONString(data));
+        // log.info("解析到一条数据:{}", JSON.toJSONString(data));
+        System.out.println(data);
         list.add(data);
         if (list.size() >= BATCH_COUNT) {
             saveData();
@@ -30,11 +36,11 @@ public class DemoDataListener extends AnalysisEventListener<DemoData> {
     @Override
     public void doAfterAllAnalysed(AnalysisContext analysisContext) {
         saveData();
-        log.info("所有数据解析完成！");
+        // log.info("所有数据解析完成！");
     }
 
-    private void saveData(){
-        log.info("{}条数据，开始存储数据库！", list.size());
-        log.info("存储数据库成功！");
+    private void saveData() {
+        // log.info("{}条数据，开始存储数据库！", list.size());
+        // log.info("存储数据库成功！");
     }
 }
