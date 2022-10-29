@@ -26,8 +26,10 @@ public class FileController {
 
     @Autowired
     FileService fileService;
-
-    private final String filePath = "D:\\workspace\\vSrc\\VBackend\\static\\";
+    // robam笔记本
+    // private final String filePath = "D:\\workspace\\vSrc\\VBackend\\static\\";
+    // 雷神
+    private final String filePath = "D:\\workspace\\java\\src\\idea_workspace\\VBackend\\static";
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/getExcelSheetList")
