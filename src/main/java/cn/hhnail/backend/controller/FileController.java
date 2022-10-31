@@ -26,10 +26,9 @@ public class FileController {
 
     @Autowired
     FileService fileService;
-    // robam笔记本
-    // private final String filePath = "D:\\workspace\\vSrc\\VBackend\\static\\";
-    // 雷神
-    private final String filePath = "D:\\workspace\\java\\src\\idea_workspace\\VBackend\\static";
+
+    // 本地文件存储路径
+    private final String filePath = System.getProperty("user.dir")+"\\static\\";
 
 
     /**

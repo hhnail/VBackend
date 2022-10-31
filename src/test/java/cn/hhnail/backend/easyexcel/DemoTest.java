@@ -9,11 +9,7 @@ import java.util.List;
 
 public class DemoTest {
 
-    // robam笔记本
-    // private final String filePath = "D:\\workspace\\vSrc\\VBackend\\static\\";
-    // 雷神
-    private final String filePath = "D:\\workspace\\java\\src\\idea_workspace\\VBackend\\static\\";
-
+    private final String filePath = System.getProperty("user.dir")+"\\static\\";
 
     @Test
     public void simpleRead() {
@@ -50,5 +46,12 @@ public class DemoTest {
             testData.add(item);
         }
         return testData;
+    }
+
+
+
+    @Test
+    public void test01(){
+        System.out.println(System.getProperty("user.dir")+"\\static\\");
     }
 }
