@@ -1,6 +1,7 @@
 package cn.hhnail.backend.controller;
 
 import cn.hhnail.backend.bean.Test;
+import cn.hhnail.backend.bean.User;
 import cn.hhnail.backend.mapper.DemoMapper;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;

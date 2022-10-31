@@ -26,10 +26,17 @@ public class FileController {
 
     @Autowired
     FileService fileService;
+    // robam笔记本
+    // private final String filePath = "D:\\workspace\\vSrc\\VBackend\\static\\";
+    // 雷神
+    private final String filePath = "D:\\workspace\\java\\src\\idea_workspace\\VBackend\\static";
 
-    private final String filePath = "D:\\workspace\\vSrc\\VBackend\\static\\";
 
-
+    /**
+     * 获取Excel的sheet
+     * @param file
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/getExcelSheetList")
     public AppResponse<Map<String, Object>> getExcelSheetList(@RequestParam("file") MultipartFile file) {
 
@@ -96,7 +103,7 @@ public class FileController {
      */
     @Test
     public void simpleWrite() {
-        String fileName = "D:\\" + "test.xlsx";
+        String fileName = filePath + "test.xlsx";
         EasyExcel.write(fileName, DemoData.class)
                 .sheet("模板")
                 .doWrite(data());
