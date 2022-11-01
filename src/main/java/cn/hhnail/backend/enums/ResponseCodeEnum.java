@@ -7,8 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ResponseCodeEnum {
 	
-	SUCCESS(0,"操作成功"),
-	FAIL(1,"服务器异常"),
+	SUCCESS(1,"操作成功"),
+	FAIL(0,"服务器异常"),
 	NOT_FOUND(404,"资源未找到"),
 	NOT_AUTHED(403,"无权限，访问拒绝"),
 	PARAM_INVAILD(400,"提交参数非法");

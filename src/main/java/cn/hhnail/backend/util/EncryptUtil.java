@@ -1,6 +1,7 @@
 package cn.hhnail.backend.util;
 
 import io.jsonwebtoken.*;
+import org.junit.Test;
 
 import java.util.Date;
 import java.util.UUID;
@@ -55,10 +56,15 @@ public class EncryptUtil {
         try {
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(signature).parseClaimsJws(jwtToken);
             Claims claims = claimsJws.getBody();
-        } catch (ExpiredJwtException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
         return true;
+    }
+
+    @Test
+    public void test(){
+        System.out.println(getJwtToken());
     }
 }
