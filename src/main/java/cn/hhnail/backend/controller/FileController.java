@@ -28,11 +28,12 @@ public class FileController {
     FileService fileService;
 
     // 本地文件存储路径
-    private final String filePath = System.getProperty("user.dir")+"\\static\\";
+    private final String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\";
 
 
     /**
      * 获取Excel的sheet
+     *
      * @param file
      * @return
      */
@@ -65,6 +66,7 @@ public class FileController {
     }
 
 
+    @Deprecated
     @RequestMapping(method = RequestMethod.POST, value = "/uploadFile")
     public AppResponse<String> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
@@ -106,5 +108,17 @@ public class FileController {
         EasyExcel.write(fileName, DemoData.class)
                 .sheet("模板")
                 .doWrite(data());
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/saveFile")
+    public AppResponse<String> saveFile(@RequestParam("file") MultipartFile file) {
+        try {
+            fileService.saveFile(filePath, file);
+            return AppResponse.ok(null);
+        } catch (Exception e) {
+            log.error("saveFile:{}", e);
+            return AppResponse.fail(null);
+        }
     }
 }

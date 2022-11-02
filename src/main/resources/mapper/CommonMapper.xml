@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.hhnail.backend.mapper.CommonMapper">
-    <select id="queryColumn">
+    <select id="queryByQueryRule" parameterType="cn.hhnail.backend.vo.request.VQueryRule" resultType="Map">
+        select
+        <if test="queryColumns!=null and queryColumns.size() > 0">
+            <foreach collection="queryColumns" item="column" separator=",">
+                ${column.columnCode} as v_${column.columnCode}
+            </foreach>
+        </if>
+        from ${primaryTable}
+        <where>
+            <if test="conditions != null and conditions.size() > 0">
+                <foreach collection="conditions" item="condition">
 
+                </foreach>
+            </if>
+        </where>
     </select>
 </mapper>
