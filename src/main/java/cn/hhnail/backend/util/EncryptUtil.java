@@ -3,7 +3,6 @@ package cn.hhnail.backend.util;
 import io.jsonwebtoken.*;
 import org.junit.Test;
 
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -14,13 +13,15 @@ import java.util.UUID;
 public class EncryptUtil {
 
     // 超时时间
-    private static long expiration = 1000 * 60 * 60 * 24;
+    private static long expiration = 1000 * 60 * 60 // 一小时
+            // * 24; // 1天
+            * 24 * 3; // 3天
     // 密钥
     private final static String signature = "hhnail";
 
     private final static EncryptUtil INSTANCE = new EncryptUtil();
 
-    private EncryptUtil() {
+    public EncryptUtil() {
 
     }
 
@@ -38,7 +39,7 @@ public class EncryptUtil {
                 .claim("userName", "张三")
                 .claim("role", "admin")
                 .setSubject("admin-test")
-                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                // .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .setId(UUID.randomUUID().toString())
                 // signature
                 .signWith(SignatureAlgorithm.HS256, signature)
@@ -49,6 +50,7 @@ public class EncryptUtil {
 
     /**
      * 解析JwtToken
+     *
      * @param jwtToken
      * @return
      */
@@ -64,7 +66,7 @@ public class EncryptUtil {
     }
 
     @Test
-    public void test(){
+    public void test() {
         System.out.println(getJwtToken());
     }
 }

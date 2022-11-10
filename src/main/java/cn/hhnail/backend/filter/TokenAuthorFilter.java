@@ -5,7 +5,6 @@ import cn.hhnail.backend.enums.ResponseCodeEnum;
 import cn.hhnail.backend.util.EncryptUtil;
 import cn.hhnail.backend.util.VStringUtil;
 import cn.hhnail.backend.vo.response.AppResponse;
-import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +12,6 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 
 
 /**
@@ -68,18 +65,18 @@ public class TokenAuthorFilter implements Filter {
             respVO.setMsg("token验证失败");
         }
 
-
+        chain.doFilter(request, response);
         // 通过验证便放行
-        if (ResponseCodeEnum.SUCCESS.getCode().equals(respVO.getCode())) {
-            chain.doFilter(request, response);
-        } else {
-            OutputStreamWriter osw = new OutputStreamWriter(response.getOutputStream(), "UTF-8");
-            PrintWriter writer = new PrintWriter(osw, true);
-            writer.write(JSON.toJSONString(respVO));
-            writer.flush();
-            writer.close();
-            osw.close();
-        }
+        // if (ResponseCodeEnum.SUCCESS.getCode().equals(respVO.getCode())) {
+        //     chain.doFilter(request, response);
+        // } else {
+        //     OutputStreamWriter osw = new OutputStreamWriter(response.getOutputStream(), "UTF-8");
+        //     PrintWriter writer = new PrintWriter(osw, true);
+        //     writer.write(JSON.toJSONString(respVO));
+        //     writer.flush();
+        //     writer.close();
+        //     osw.close();
+        // }
     }
 
     @Override

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hhnail.backend.mapper.StaffMapper">
+    <select id="getStaffList" parameterType="hashmap" resultType="hashmap">
+        select
+        <trim suffixOverrides=",">
+            id,
+            job_no,
+            name,
+            date_format(birthday, '%Y-%m-%d') as birthday,
+            recruitment_source,
+        </trim>
+        from staff
+        <where>
+        </where>
+    </select>
+</mapper>
