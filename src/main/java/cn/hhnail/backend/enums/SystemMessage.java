@@ -14,6 +14,7 @@ public enum SystemMessage {
     ADD_SUCCESS("新增成功", 500, "add success"),
     EDIT_SUCCESS("编辑成功", 500, "edit failed"),
     DELETE_SUCCESS("删除成功", 500, "delete failed"),
+    ENUM_NOT_MATCH("没有匹配的枚举", 500, "can not match enum"),
     ;
 
     private String message;

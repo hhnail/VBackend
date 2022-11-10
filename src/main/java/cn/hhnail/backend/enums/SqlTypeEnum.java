@@ -16,9 +16,15 @@ public enum SqlTypeEnum {
     private String code;
 
 
-    public SqlTypeEnum getInstance(String code){
+    public static SqlTypeEnum match(String code) {
         SqlTypeEnum[] values = SqlTypeEnum.values();
-        return null;
+        for (int i = 0; i < values.length; i++) {
+            SqlTypeEnum value = values[i];
+            if (value.getCode().equals(code)) {
+                return value;
+            }
+        }
+        throw new RuntimeException(SystemMessage.ENUM_NOT_MATCH.getMessage());
     }
 
 
