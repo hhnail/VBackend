@@ -10,6 +10,7 @@ package cn.hhnail.backend.mapstruct;
 // import org.mapstruct.factory.Mappers;
 
 // @Mapper // 注意是mapstruct的@Mapper
+@Deprecated
 public interface FreeReportAdapter {
 
     // FreeReportAdapter INSTANCE = Mappers.getMapper(FreeReportAdapter.class);

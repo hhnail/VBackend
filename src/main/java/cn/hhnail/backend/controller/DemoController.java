@@ -1,7 +1,6 @@
 package cn.hhnail.backend.controller;
 
 import cn.hhnail.backend.bean.Test;
-import cn.hhnail.backend.bean.User;
 import cn.hhnail.backend.mapper.DemoMapper;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/vapi")
 @Api(value = "测试控制器", tags = {"测试"})
+@Deprecated
 public class DemoController {
 
     @Autowired

@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
+@Deprecated
 public enum SqlTypeEnum {
 
     INSERT("0"),
