@@ -31,4 +31,6 @@ server:
 third-api:
   baidu-translate:
     url: http://api.fanyi.baidu.com/api/trans/vip/translate
+    app_id: 20220515001216767
+    app_key: _AUEiiSMHzx8kyDDr8lf
 

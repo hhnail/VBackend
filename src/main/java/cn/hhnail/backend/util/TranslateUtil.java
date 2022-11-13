@@ -1,9 +1,12 @@
 package cn.hhnail.backend.util;
 
 import cn.hhnail.backend.bean.TranslateResult;
+import cn.hhnail.backend.config.PatternProperties;
+import cn.hhnail.backend.config.ThirdApiProperties;
 import cn.hhnail.backend.enums.Languages;
 import com.alibaba.fastjson.JSON;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
@@ -19,6 +22,7 @@ import java.nio.charset.StandardCharsets;
 @Data
 // @ConfigurationProperties(prefix = "third-api")
 // @PropertySource(value="classpath:third-api.properties")
+// @RefreshScope // nacos自动更新配置
 public class TranslateUtil {
 
     // TODO yml注入配置
@@ -44,6 +48,11 @@ public class TranslateUtil {
     //     System.out.println(result);
     // }
 
+    @Autowired
+    private PatternProperties patternProperties;
+    @Autowired
+    private ThirdApiProperties thirdApiProperties;
+
     /**
      * 最简单的API
      * 将英语转化为中文
@@ -63,6 +72,9 @@ public class TranslateUtil {
     public static String translate(String query,Languages from,Languages to) {
         // TranslateUtil translateUtil = new TranslateUtil();
         // 加密前的签名
+
+        // thirdApiProperties.getBaiduTranslate()
+
         String beforeSign = APP_ID + query + SALT + APP_KEY;
         // 使用MD5算法，加密后的签名
         String sign = DigestUtils.md5DigestAsHex(beforeSign.getBytes(StandardCharsets.UTF_8));
