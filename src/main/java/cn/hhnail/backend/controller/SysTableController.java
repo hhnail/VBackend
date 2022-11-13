@@ -1,12 +1,11 @@
 package cn.hhnail.backend.controller;
 
-import cn.hhnail.backend.bean.Field;
+import cn.hhnail.backend.bean.QueryOption;
 import cn.hhnail.backend.bean.SysColumn;
 import cn.hhnail.backend.bean.SysTable;
 import cn.hhnail.backend.service.ComService;
 import cn.hhnail.backend.service.SysTableService;
 import cn.hhnail.backend.util.StringUtils;
-import cn.hhnail.backend.bean.QueryOption;
 import cn.hhnail.backend.vo.request.SysTableReqVO;
 import cn.hhnail.backend.vo.response.AppResponse;
 import cn.hhnail.backend.vo.response.SysTableRespVO;
@@ -17,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,7 +108,7 @@ public class SysTableController {
      * 获取码表
      */
     @PostMapping(value = "/getCodeTable")
-    public AppResponse<List<SysTableRespVO>> getCodeTable(@RequestBody @NotBlank QueryOption queryOption) {
+    public AppResponse<List<SysTableRespVO>> getCodeTable(@RequestBody QueryOption queryOption) {
         logger.info("表类型（单级编码或多级编码）={}", queryOption);
         // String type = params.get("type").toString();
         // List<SysTableRespVO> tables = sysTableService.getCodeTable(type);
@@ -123,7 +121,7 @@ public class SysTableController {
      * 添加字段（逻辑、物理）
      */
     @PostMapping(value = "/addField")
-    public AppResponse<List<SysTableRespVO>> addField(@RequestBody @NotBlank SysColumn field) {
+    public AppResponse<List<SysTableRespVO>> addField(@RequestBody SysColumn field) {
         try {
             logger.info("添加字段={}", field);
             comService.addField(field);

@@ -57,13 +57,13 @@ public class TokenAuthorFilter implements Filter {
             respVO.setMsg("token不得为空");
         }
 
-        if (EncryptUtil.checkJwtToken(token)) {
-            respVO.setCode(ResponseCodeEnum.SUCCESS.getCode());
-            respVO.setMsg("token验证通过");
-        } else {
-            respVO.setCode(ResponseCodeEnum.FAIL.getCode());
-            respVO.setMsg("token验证失败");
-        }
+        // if (EncryptUtil.checkJwtToken(token)) {
+        //     respVO.setCode(ResponseCodeEnum.SUCCESS.getCode());
+        //     respVO.setMsg("token验证通过");
+        // } else {
+        //     respVO.setCode(ResponseCodeEnum.FAIL.getCode());
+        //     respVO.setMsg("token验证失败");
+        // }
 
         chain.doFilter(request, response);
         // 通过验证便放行
