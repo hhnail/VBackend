@@ -5,11 +5,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @ApiModel
-public class Test {
+public class Test implements Serializable {
 
     @ApiModelProperty(value = "唯一编码")
     private Integer id;

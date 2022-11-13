@@ -65,6 +65,8 @@ public class TreeNodeServiceImpl implements TreeNodeService {
 		wrapper.eq("deleted", 0)
 				.eq("type", SIDEBAR.getType())
 				.eq("module_id", pid)
+				// 侧边栏level都是2及以上，1是顶部菜单
+				.gt("level",1)
 				.orderByAsc("level");
 		List<TreeNode> treeNodes = treeNodeMapper.selectList(wrapper);
 		return treeNodes;
@@ -112,6 +114,16 @@ public class TreeNodeServiceImpl implements TreeNodeService {
 		wrapper.eq("deleted", 0)
 				.orderByAsc("level")
 				.eq("type", TABLE_GROUP.getType());
+		List<TreeNode> treeNodes = treeNodeMapper.selectList(wrapper);
+		return treeNodes;
+	}
+
+	@Override
+	public List<TreeNode> getRoleGroup() {
+		QueryWrapper<TreeNode> wrapper = new QueryWrapper<>();
+		wrapper.eq("deleted", 0)
+				.orderByAsc("level")
+				.eq("type", ROLE_GROUP.getType());
 		List<TreeNode> treeNodes = treeNodeMapper.selectList(wrapper);
 		return treeNodes;
 	}

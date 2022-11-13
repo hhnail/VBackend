@@ -3,11 +3,12 @@ package cn.hhnail.backend.vo.response;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class ModuleRespVO {
+public class ModuleRespVO implements Serializable {
 
 	private Integer key;
 

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhnail.backend.mapper.SysTableMapper">
+    <resultMap id="BaseResultMap" type="cn.hhnail.backend.bean.SysTable">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="chinese_name" property="chineseName" jdbcType="VARCHAR"/>
+        <result column="english_name" property="englishName" jdbcType="VARCHAR"/>
+        <result column="order_id" property="orderId" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="INTEGER"/>
+    </resultMap>
+    <!-- 基础字段 -->
+    <sql id="Base_Column_List">
+        id
+        , chinese_name, english_name, order_id,deleted
+    </sql>
+
+
+    <!-- 查询表（已过时）。简单查询使用 mybatis plus 完成 -->
+    <select id="selectTables" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_table
+    </select>
+
+    <!-- 创建表 -->
+    <update id="createTable" parameterType="cn.hhnail.backend.vo.request.SysTableReqVO">
+        CREATE TABLE `${name}`
+        <foreach collection="columns" item="columnItem" separator="," open="(" close=", PRIMARY KEY (`id`))">
+            `${columnItem.name}`
+            <choose>
+                <when test="columnItem.type == 'varchar'">${columnItem.type}(${columnItem.length})</when>
+                <otherwise>${columnItem.type}</otherwise>
+            </choose>
+            <if test="columnItem.nullable == 0">
+                NOT
+            </if>
+            NULL
+            <if test="columnItem.remark">
+                COMMENT "${columnItem.remark}"
+            </if>
+        </foreach>
+    </update>
+
+    <!--
+    保存表信息 void saveTableInfo(SysTableReqVO reqVO);
+    已废弃。使用mybatis plus实现
+     -->
+    <insert id="saveTableInfo" parameterType="cn.hhnail.backend.vo.request.SysTableReqVO">
+        INSERT INTO `sys_table`
+            (`name`, label, module_id, order_id, remark)
+        VALUES ('${name}', '${label}', ${moduleId}, ${orderId}, "${remark}");
+    </insert>
+
+    <!-- 保存表字段信息 void saveFieldsInfo(SysTableReqVO reqVO); -->
+    <insert id="saveFieldsInfo" parameterType="cn.hhnail.backend.vo.request.SysTableReqVO">
+        INSERT INTO `sys_column`
+        (`name`, label, visible, sys_table_id)
+        VALUES
+        <foreach collection="columns" item="column" close=";" separator=",">
+            (
+            '${column.name}', '${column.label}',
+            <choose>
+                <when test="column.visible">${column.visible}</when>
+                <otherwise>0</otherwise>
+            </choose>
+            ,
+            ${id}
+            )
+        </foreach>
+    </insert>
+
+
+    <!-- void dropTable(String tableName); -->
+    <delete id="dropTable" parameterType="java.lang.String">
+        drop table ${tableName}
+    </delete>
+
+    <!-- void alterTableName(String oldName, String newName); -->
+    <update id="alterTableName" parameterType="java.lang.String">
+        alter table ${oldName} RENAME TO ${newName}
+    </update>
+</mapper>
