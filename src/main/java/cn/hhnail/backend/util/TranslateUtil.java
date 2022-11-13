@@ -25,6 +25,9 @@ public class TranslateUtil {
     // @Value(value = "${third-api.baidu-translate.url}")
     // @Value(value = "${url}")
     // private static String URL;
+
+    // @Value(value = "${third-api.baidu-translate.url}")
+    // private String URL;
     private final static String URL = "http://api.fanyi.baidu.com/api/trans/vip/translate";
 
 
@@ -58,6 +61,7 @@ public class TranslateUtil {
      * @return 翻译的结果
      */
     public static String translate(String query,Languages from,Languages to) {
+        // TranslateUtil translateUtil = new TranslateUtil();
         // 加密前的签名
         String beforeSign = APP_ID + query + SALT + APP_KEY;
         // 使用MD5算法，加密后的签名

@@ -23,8 +23,12 @@ mybatis-plus:
     #    驼峰命名自动映射   eg：userName —> user_name
     map-underscore-to-camel-case: true
 #    mapper-location: mapper/*.xml
-#服务
+# 服务
 server:
 #  端口号
   port: 18080
+# 第三方接口
+third-api:
+  baidu-translate:
+    url: http://api.fanyi.baidu.com/api/trans/vip/translate
 
