@@ -32,6 +32,7 @@ public class OrganizationController {
 
         String id = param.get("id").toString();
 
+
         List<Map<String, Object>> voList = organizationService.getLeafOrganization(id);
 
         // 统一返回格式
