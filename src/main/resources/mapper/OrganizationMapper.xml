@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhnail.backend.mapper.OrganizationMapper">
+
+
+    <select id="getLeafOrganization" parameterType="hashmap" resultType="hashmap">
+        WITH RECURSIVE table1 as (
+            SELECT
+                id,name,pid,status
+            FROM
+                organization
+            WHERE
+                id = #{id}
+            UNION
+            SELECT
+                table2.id,
+                table2.name,
+                table2.pid,
+                table2.status
+            FROM
+                organization table2,
+                table1
+            WHERE
+                table1.id = table2.pid
+        )
+        SELECT
+            id,name,pid,status
+        FROM
+            table1;
+    </select>
+
+
+</mapper>
