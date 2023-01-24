@@ -7,17 +7,17 @@ import cn.hhnail.backend.service.HotelService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import org.apache.http.HttpHost;
-// import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.update.UpdateRequest;
-import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.slf4j.Logger;
@@ -256,6 +256,21 @@ public class ElasticSearchController {
         );
         esClient.update(request, RequestOptions.DEFAULT);
 
+    }
+
+    /**
+     * 删除文档
+     *
+     * @return
+     */
+    @PostMapping("/deleteDocument")
+    public void deleteDocument(@RequestBody Map<String, Object> param) throws Exception {
+        // 1-初始化连接
+        RestHighLevelClient esClient = new RestHighLevelClient(
+                RestClient.builder(HttpHost.create("http://192.168.225.130:9200"))
+        );
+        DeleteRequest request = new DeleteRequest("hotel", "36934");
+        esClient.delete(request, RequestOptions.DEFAULT);
     }
 
 
