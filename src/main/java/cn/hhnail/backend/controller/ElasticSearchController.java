@@ -12,6 +12,7 @@ import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
@@ -99,8 +100,11 @@ public class ElasticSearchController {
     public static void main(String[] args) {
         // new ElasticSearchController().createIndex();
         // new ElasticSearchController().deleteIndex();
-        new ElasticSearchController().existIndex();
+        // new ElasticSearchController().existIndex();
+
+
     }
+
 
     /**
      * 创建索引库
@@ -192,7 +196,7 @@ public class ElasticSearchController {
 
 
     /**
-     * 新增文档
+     * 新增（全量更新）文档
      *
      * @return
      */
@@ -226,10 +230,32 @@ public class ElasticSearchController {
                 RestClient.builder(HttpHost.create("http://192.168.225.130:9200"))
         );
 
-        GetRequest request = new GetRequest("hotel","36934");
+        GetRequest request = new GetRequest("hotel", "36934");
         GetResponse response = esClient.get(request, RequestOptions.DEFAULT);
         String sourceString = response.getSourceAsString();
         System.out.println(JSONObject.parse(sourceString));
+    }
+
+
+    /**
+     * 局部更新文档
+     *
+     * @return
+     */
+    @PostMapping("/updateDocument")
+    public void updateDocument(@RequestBody Map<String, Object> param) throws Exception {
+        // 1-初始化连接
+        RestHighLevelClient esClient = new RestHighLevelClient(
+                RestClient.builder(HttpHost.create("http://192.168.225.130:9200"))
+        );
+
+        UpdateRequest request = new UpdateRequest("hotel", "36934");
+        request.doc(
+                "price", 888,
+                "starName", "三钻"
+        );
+        esClient.update(request, RequestOptions.DEFAULT);
+
     }
 
 
