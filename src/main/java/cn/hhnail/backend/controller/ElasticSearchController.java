@@ -9,6 +9,8 @@ import io.swagger.annotations.Api;
 import org.apache.http.HttpHost;
 // import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.elasticsearch.action.get.GetRequest;
+import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.RequestOptions;
@@ -209,6 +211,25 @@ public class ElasticSearchController {
         request.source(JSONObject.toJSONString(hotelDTO), XContentType.JSON);
         esClient.index(request, RequestOptions.DEFAULT);
         return null;
+    }
+
+
+    /**
+     * 查询文档
+     *
+     * @return
+     */
+    @PostMapping("/getDocument")
+    public void getDocument(@RequestBody Map<String, Object> param) throws Exception {
+        // 1-初始化连接
+        RestHighLevelClient esClient = new RestHighLevelClient(
+                RestClient.builder(HttpHost.create("http://192.168.225.130:9200"))
+        );
+
+        GetRequest request = new GetRequest("hotel","36934");
+        GetResponse response = esClient.get(request, RequestOptions.DEFAULT);
+        String sourceString = response.getSourceAsString();
+        System.out.println(JSONObject.parse(sourceString));
     }
 
 

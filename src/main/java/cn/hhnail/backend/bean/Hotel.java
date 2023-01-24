@@ -3,6 +3,8 @@ package cn.hhnail.backend.bean;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * @author Hhnail
  * @version 1.0
@@ -11,7 +13,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class Hotel {
+public class Hotel implements Serializable {
 
     private Long id;
     // 酒店名称

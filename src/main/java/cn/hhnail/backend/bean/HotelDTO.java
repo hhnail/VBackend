@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.beans.BeanUtils;
 
+import java.io.Serializable;
+
 /**
  * @author Hhnail
  * @version 1.0
@@ -14,7 +16,7 @@ import org.springframework.beans.BeanUtils;
 @Data
 @ToString
 @NoArgsConstructor
-public class HotelDTO {
+public class HotelDTO implements Serializable {
 
     private Long id;
     // 酒店名称
