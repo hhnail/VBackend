@@ -8,4 +8,5 @@ public interface HotelService {
 
     Hotel getHotelById(Long id);
 
+    List<Hotel> getHotelList();
 }

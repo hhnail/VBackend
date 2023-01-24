@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -271,6 +273,40 @@ public class ElasticSearchController {
         );
         DeleteRequest request = new DeleteRequest("hotel", "36934");
         esClient.delete(request, RequestOptions.DEFAULT);
+    }
+
+
+    /**
+     * 批量插入文档
+     *
+     * @return
+     */
+    @PostMapping("/batchAddDocument")
+    public void batchAddDocument(@RequestBody Map<String, Object> param) throws Exception {
+        // 1-初始化连接
+        RestHighLevelClient esClient = new RestHighLevelClient(
+                RestClient.builder(HttpHost.create("http://192.168.225.130:9200"))
+        );
+        // 从数据库查询po
+        List<Hotel> hotelPoList = hotelService.getHotelList();
+        List<HotelDTO> hotelDTOList = new ArrayList<>();
+        for (Hotel hotelPO : hotelPoList) {
+            HotelDTO hotelDTO = new HotelDTO(hotelPO);
+            hotelDTOList.add(hotelDTO);
+        }
+        // 2-准备文档的请求对象
+        BulkRequest request = new BulkRequest();
+        for (HotelDTO hotelDTO : hotelDTOList) {
+            request.add(
+                    new IndexRequest("hotel")
+                            .id(hotelDTO.getId().toString())
+                            .source(
+                                    JSONObject.toJSONString(hotelDTO),
+                                    XContentType.JSON
+                            )
+            );
+        }
+        esClient.bulk(request, RequestOptions.DEFAULT);
     }
 
 
