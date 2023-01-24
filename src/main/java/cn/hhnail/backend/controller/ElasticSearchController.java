@@ -1,10 +1,15 @@
 package cn.hhnail.backend.controller;
 
+import cn.hhnail.backend.bean.Hotel;
+import cn.hhnail.backend.bean.HotelDTO;
 import cn.hhnail.backend.service.ElasticSearchService;
+import cn.hhnail.backend.service.HotelService;
+import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import org.apache.http.HttpHost;
 // import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
@@ -16,11 +21,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/vapi/es")
@@ -63,11 +70,8 @@ public class ElasticSearchController {
             "        \"type\": \"keyword\",\n" +
             "        \"copy_to\": \"all\"\n" +
             "      },\n" +
-            "      \"latitude\": {\n" +
-            "        \"type\": \"geo_point\"\n" +
-            "      },\n" +
-            "      \"longitude\": {\n" +
-            "        \"type\": \"geo_point\"\n" +
+            "      \"location\":{\n" +
+            "        \"type\": \"text\"\n" +
             "      },\n" +
             "      \"pic\": {\n" +
             "        \"type\": \"keyword\",\n" +
@@ -86,6 +90,9 @@ public class ElasticSearchController {
     @Autowired
     ElasticSearchService esService;
 
+    @Autowired
+    HotelService hotelService;
+
 
     public static void main(String[] args) {
         // new ElasticSearchController().createIndex();
@@ -93,7 +100,11 @@ public class ElasticSearchController {
         new ElasticSearchController().existIndex();
     }
 
-
+    /**
+     * 创建索引库
+     *
+     * @return
+     */
     @PostMapping("/createIndex")
     public List<Object> createIndex() {
         try {
@@ -121,6 +132,12 @@ public class ElasticSearchController {
 
     }
 
+
+    /**
+     * 删除索引库
+     *
+     * @return
+     */
     @PostMapping("/deleteIndex")
     public List<Object> deleteIndex() {
         try {
@@ -144,6 +161,11 @@ public class ElasticSearchController {
     }
 
 
+    /**
+     * 判断索引库是否存在
+     *
+     * @return
+     */
     @PostMapping("/existIndex")
     public List<Object> existIndex() {
         try {
@@ -164,6 +186,29 @@ public class ElasticSearchController {
             return null;
         }
 
+    }
+
+
+    /**
+     * 新增文档
+     *
+     * @return
+     */
+    @PostMapping("/addDocument")
+    public Object addDocument(@RequestBody Map<String, Object> param) throws Exception {
+        // 1-初始化连接
+        RestHighLevelClient esClient = new RestHighLevelClient(
+                RestClient.builder(HttpHost.create("http://192.168.225.130:9200"))
+        );
+        // 从数据库查询po
+        Long id = 36934L;
+        Hotel hotelPo = hotelService.getHotelById(id);
+        HotelDTO hotelDTO = new HotelDTO(hotelPo);
+        // 2-准备文档的请求对象
+        IndexRequest request = new IndexRequest("hotel").id(hotelDTO.getId().toString());
+        request.source(JSONObject.toJSONString(hotelDTO), XContentType.JSON);
+        esClient.index(request, RequestOptions.DEFAULT);
+        return null;
     }
 
 
