@@ -102,7 +102,25 @@ public class EsSearchTest {
     }
 
 
+    /**
+     * match
+     *
+     * @return
+     */
+    @Test
+    public void match() throws Exception {
+        SearchRequest request = new SearchRequest("hotel");
 
+        request.source()
+                .query(QueryBuilders.matchQuery("all", "如家"));
+
+        SearchResponse response = elasticSearchClient
+                .search(request, RequestOptions.DEFAULT);
+
+        handleResponse(response);
+
+
+    }
 
 
 }
