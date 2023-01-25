@@ -8,6 +8,8 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.RangeQueryBuilder;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.junit.After;
@@ -113,6 +115,52 @@ public class EsSearchTest {
 
         request.source()
                 .query(QueryBuilders.matchQuery("all", "如家"));
+
+        SearchResponse response = elasticSearchClient
+                .search(request, RequestOptions.DEFAULT);
+
+        handleResponse(response);
+
+
+    }
+
+
+    /**
+     * term
+     *
+     * @return
+     */
+    @Test
+    public void term() throws Exception {
+        SearchRequest request = new SearchRequest("hotel");
+
+
+        final TermQueryBuilder queryBuilder = QueryBuilders.termQuery("city", "上海");
+        request.source()
+                .query(queryBuilder);
+
+        SearchResponse response = elasticSearchClient
+                .search(request, RequestOptions.DEFAULT);
+
+        handleResponse(response);
+
+
+    }
+
+
+    /**
+     * range
+     *
+     * @return
+     */
+    @Test
+    public void range() throws Exception {
+        SearchRequest request = new SearchRequest("hotel");
+
+
+        final RangeQueryBuilder queryBuilder = QueryBuilders.rangeQuery("price").gte(100).lte(300);
+        request.source()
+                .query(queryBuilder);
 
         SearchResponse response = elasticSearchClient
                 .search(request, RequestOptions.DEFAULT);

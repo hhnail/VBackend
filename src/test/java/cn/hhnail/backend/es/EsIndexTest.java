@@ -33,9 +33,10 @@ import java.util.Map;
 /**
  * @author Hhnail
  * @version 1.0
- * @description: 测试ES搜索文档的Java API
+ * @description: 测试ES操作索引库的Java API
  * @date 2023/1/25 14:49
  */
+@Deprecated // 注入不了servce。弃用测试类
 public class EsIndexTest {
 
     private RestHighLevelClient elasticSearchClient;
