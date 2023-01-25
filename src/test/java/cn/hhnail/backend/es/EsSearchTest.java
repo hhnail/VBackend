@@ -81,6 +81,12 @@ public class EsSearchTest {
         SearchResponse response = elasticSearchClient
                 .search(request, RequestOptions.DEFAULT);
 
+        // ctrl + alt + m 快速抽取方法
+        handleResponse(response);
+
+    }
+
+    private void handleResponse(SearchResponse response) {
         System.out.println("====================== 华丽的分割线 ====================== ");
         SearchHits hits = response.getHits();
         final long totalCount = hits.getTotalHits().value;
@@ -93,9 +99,10 @@ public class EsSearchTest {
             System.out.println(json);
         }
         System.out.println("====================== 华丽的分割线 ====================== ");
-
-
     }
+
+
+
 
 
 }
