@@ -14,6 +14,7 @@ import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.sort.SortOrder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -196,8 +197,39 @@ public class EsSearchTest {
 
     }
 
+    /**
+     * sort、from、size
+     *
+     * @return
+     */
+    @Test
+    public void sortAndPage() throws Exception {
+
+        int page = 2, size = 5;
+
+        // 1-准备request
+        SearchRequest request = new SearchRequest("hotel");
+
+        // 2-准备查询条件
+        request.source()
+                .query(QueryBuilders.matchAllQuery())
+                // 分页
+                .from((page - 1) * size)
+                .size(size)
+                // 排序
+                .sort("price", SortOrder.ASC)
+        ;
 
 
+        // 3-发送查询请求
+        SearchResponse response = elasticSearchClient
+                .search(request, RequestOptions.DEFAULT);
+
+        // 4-解析打印查询结果
+        handleResponse(response);
+
+
+    }
 
 
 }
