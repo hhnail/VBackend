@@ -1,12 +1,14 @@
 package cn.hhnail.backend.es;
 
 import org.apache.http.HttpHost;
+import org.apache.lucene.queryparser.xml.builders.BooleanQueryBuilder;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.index.query.TermQueryBuilder;
@@ -169,6 +171,33 @@ public class EsSearchTest {
 
 
     }
+
+    /**
+     * bool
+     *
+     * @return
+     */
+    @Test
+    public void bool() throws Exception {
+        SearchRequest request = new SearchRequest("hotel");
+
+
+        final BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
+        queryBuilder.must(QueryBuilders.termQuery("city", "上海"));
+        queryBuilder.filter(QueryBuilders.rangeQuery("price").lte(200));
+
+        request.source().query(queryBuilder);
+
+        SearchResponse response = elasticSearchClient
+                .search(request, RequestOptions.DEFAULT);
+
+        handleResponse(response);
+
+
+    }
+
+
+
 
 
 }
