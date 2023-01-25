@@ -94,7 +94,8 @@ public class ElasticSearchController {
 
     @Autowired
     ElasticSearchService esService;
-
+    @Autowired
+    RestHighLevelClient esClient;
     @Autowired
     HotelService hotelService;
 
@@ -178,16 +179,16 @@ public class ElasticSearchController {
     public List<Object> existIndex() {
         try {
             // 初始化连接
-            RestHighLevelClient esClient = new RestHighLevelClient(
-                    RestClient.builder(HttpHost.create("http://192.168.225.130:9200"))
-            );
+            // RestHighLevelClient esClient = new RestHighLevelClient(
+            //         RestClient.builder(HttpHost.create("http://192.168.225.130:9200"))
+            // );
             // 索引库名称
             GetIndexRequest req = new GetIndexRequest("hotel");
             // 向服务器发送请求，创建索引库
             boolean exists = esClient.indices().exists(req, RequestOptions.DEFAULT);
             System.out.println("hotel索引库是否存在" + exists);
             // 关闭连接资源
-            esClient.close();
+            // esClient.close();
             return null;
         } catch (IOException e) {
             logger.info("ES查询失败，报错信息：" + e);
