@@ -1,12 +1,10 @@
 package cn.hhnail.backend.es;
 
 import org.apache.http.HttpHost;
-import org.apache.lucene.queryparser.xml.builders.BooleanQueryBuilder;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
-import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -20,10 +18,6 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
@@ -265,7 +259,8 @@ public class EsSearchTest {
             Map<String, HighlightField> highlightFields = hit.getHighlightFields();
             HighlightField name = highlightFields.get("name");
             String highlightedName = name.getFragments()[0].string();
-            // ... 处理高亮后的name字段
+            // 处理高亮后的name字段
+            // ...
             System.out.println(highlightedName);
         }
 
