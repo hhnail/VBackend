@@ -14,6 +14,8 @@ import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.SortOrder;
 import org.junit.After;
 import org.junit.Before;
@@ -227,6 +229,45 @@ public class EsSearchTest {
 
         // 4-解析打印查询结果
         handleResponse(response);
+
+
+    }
+
+
+    /**
+     * highlight
+     *
+     * @return
+     */
+    @Test
+    public void highlight() throws Exception {
+
+        // 1-准备request
+        SearchRequest request = new SearchRequest("hotel");
+
+        // 2-准备查询条件
+        request.source()
+                .query(QueryBuilders.matchAllQuery())
+                .highlighter(new HighlightBuilder()
+                        .field("name")
+                        .requireFieldMatch(false)
+                )
+        ;
+
+
+        // 3-发送查询请求
+        SearchResponse response = elasticSearchClient
+                .search(request, RequestOptions.DEFAULT);
+
+        // 4-解析打印查询结果
+        SearchHit[] hits = response.getHits().getHits();
+        for (SearchHit hit : hits) {
+            Map<String, HighlightField> highlightFields = hit.getHighlightFields();
+            HighlightField name = highlightFields.get("name");
+            String highlightedName = name.getFragments()[0].string();
+            // ... 处理高亮后的name字段
+            System.out.println(highlightedName);
+        }
 
 
     }
