@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Hhnail
@@ -38,4 +39,11 @@ public class Hotel implements Serializable {
     private String longitude;
     // '酒店图片'
     private String pic;
+    // 与当前位置的距离
+    // private Object distance;
+    // 是否是广告（增加算分权重）
+    // private Boolean isAD;
+    // 自动补全建议
+    // private List<String> suggestions;
+
 }

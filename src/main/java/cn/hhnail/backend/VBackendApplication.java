@@ -19,7 +19,7 @@ public class VBackendApplication {
 
     }
 
-	// 自动注入，交由spring管理
+	// ES客户端自动注入，交由spring管理
     @Bean
     public RestHighLevelClient client() {
         return new RestHighLevelClient(

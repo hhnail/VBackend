@@ -285,9 +285,9 @@ public class ElasticSearchController {
     @PostMapping("/batchAddDocument")
     public void batchAddDocument(@RequestBody Map<String, Object> param) throws Exception {
         // 1-初始化连接
-        RestHighLevelClient esClient = new RestHighLevelClient(
-                RestClient.builder(HttpHost.create("http://192.168.225.130:9200"))
-        );
+        // RestHighLevelClient esClient = new RestHighLevelClient(
+        //         RestClient.builder(HttpHost.create("http://192.168.225.130:9200"))
+        // );
         // 从数据库查询po
         List<Hotel> hotelPoList = hotelService.getHotelList();
         List<HotelDTO> hotelDTOList = new ArrayList<>();

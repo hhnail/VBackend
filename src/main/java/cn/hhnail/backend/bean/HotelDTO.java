@@ -6,6 +6,8 @@ import lombok.ToString;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Hhnail
@@ -40,11 +42,18 @@ public class HotelDTO implements Serializable {
     private String location;
     // 酒店图片url
     private String pic;
+    // 与当前位置的距离
+    private Object distance;
+    // 是否是广告（增加算分权重）
+    private Boolean isAD;
+    // 自动补全建议
+    private List<String> suggestions;
 
 
     public HotelDTO(Hotel po) {
         BeanUtils.copyProperties(po, this);
         this.location = po.getLatitude() + ", " + po.getLongitude();
+        this.suggestions = Arrays.asList(this.brand, this.business);
     }
 
 
