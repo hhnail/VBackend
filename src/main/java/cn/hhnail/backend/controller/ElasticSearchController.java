@@ -13,6 +13,8 @@ import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
@@ -21,13 +23,16 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.search.suggest.Suggest;
+import org.elasticsearch.search.suggest.SuggestBuilder;
+import org.elasticsearch.search.suggest.SuggestBuilders;
+import org.elasticsearch.search.suggest.SuggestionBuilder;
+import org.elasticsearch.search.suggest.completion.CompletionSuggester;
+import org.elasticsearch.search.suggest.completion.CompletionSuggestion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -310,5 +315,44 @@ public class ElasticSearchController {
         esClient.bulk(request, RequestOptions.DEFAULT);
     }
 
+
+    /**
+     * 自动补全提示
+     *
+     * @return
+     */
+    @PostMapping("/autoComplete")
+    public List<String> autoComplete(@RequestParam("prefix") String prefix) throws Exception {
+
+        List<String> responseSuggestions = new ArrayList<>();
+
+        // 1-准备request对象
+        SearchRequest request = new SearchRequest("hotel");
+        // 2-准备DSL
+        request.source()
+                .suggest(new SuggestBuilder().addSuggestion(
+                        "suggestions", // suggest map的key
+                        SuggestBuilders
+                                .completionSuggestion("suggestions") // completion的field
+                                .prefix(prefix)
+                                .skipDuplicates(true)
+                                .size(10)
+
+                ));
+        // 3-发送请求
+        final SearchResponse response = esClient.search(request, RequestOptions.DEFAULT);
+
+        // 4-解析es的响应结果
+        final Suggest suggest = response.getSuggest();
+
+        CompletionSuggestion suggestions = suggest.getSuggestion("suggestions");
+
+
+        for (CompletionSuggestion.Entry.Option option : suggestions.getOptions()) {
+            responseSuggestions.add(option.getText().string());
+        }
+        return responseSuggestions;
+
+    }
 
 }
