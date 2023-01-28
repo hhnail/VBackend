@@ -4,10 +4,10 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/hhnail
     username: root
-#    雷神笔记本
+    #    雷神笔记本
     password: 123456
-#    默认密码
-#    password: root
+  #    默认密码
+  #    password: root
   redis:
     database: 0
     host: localhost
@@ -16,6 +16,18 @@ spring:
       pool:
         max-active: 8
         max-wait: -1
+  #        mq
+  rabbitmq:
+    host: 192.168.225.130
+    #    mq请求端口。15672是服务端口
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: /
+    my-queue:
+      hotel-insert-queue: hotel.insert.queue
+      hotel-delete-queue: hotel.delete.queue
+
 mybatis-plus:
   configuration:
     #    mybatis日志（查看数据流、最终的sql等）
@@ -25,7 +37,7 @@ mybatis-plus:
 #    mapper-location: mapper/*.xml
 # 服务
 server:
-#  端口号
+  #  端口号
   port: 18080
 # 第三方接口
 third-api:
