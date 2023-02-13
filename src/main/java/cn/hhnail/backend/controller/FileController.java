@@ -7,16 +7,19 @@ import cn.hhnail.backend.vo.response.AppResponse;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.read.metadata.ReadSheet;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.*;
 
 @RestController
@@ -120,5 +123,52 @@ public class FileController {
             log.error("saveFile:{}", e);
             return AppResponse.fail(null);
         }
+    }
+
+
+
+    /**
+     * 导出Excel
+     * 文件下载
+     */
+    @ApiOperation(value = "导出")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "分页起始位置", required = true, dataType = "Integer"),
+            @ApiImplicitParam(name = "limit", value = "分页结束位置", required = true, dataType = "Integer")
+    })
+    @GetMapping("/export")
+    public void export(@RequestParam Map<String, Object> params, HttpServletResponse response) throws Exception {
+        List<DemoData> data = data();
+        exportExcel(response, "用户统计数据", DemoData.class, data);
+    }
+
+
+    /**
+     * 导出excel
+     *
+     * @param response 相应response
+     * @param title    保存文件的标题
+     * @param head     保存excel对象的实体类
+     * @param list     需要保存的数据列表
+     * @throws IOException 异常捕获
+     */
+    public void exportExcel(HttpServletResponse response, String title, Class head, List list) throws IOException {
+        exportExcel(response, title, head, list, null);
+
+    }
+
+    public void exportExcel(HttpServletResponse response, String title, Class head, List list, Set<String> set) throws IOException {
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+        String fileName = URLEncoder.encode(title, "UTF-8");
+        response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+        if (set == null) {
+            EasyExcel.write(response.getOutputStream(), head).sheet("模板")
+                    .doWrite(list);
+        } else {
+            EasyExcel.write(response.getOutputStream(), head).includeColumnFiledNames(set).sheet("模板")
+                    .doWrite(list);
+        }
+
     }
 }
