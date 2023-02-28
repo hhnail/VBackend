@@ -2,7 +2,10 @@ package cn.hhnail.backend.controller;
 
 
 import cn.hhnail.backend.bean.DemoData;
+import cn.hhnail.backend.bean.MaintenanceWorker;
+import cn.hhnail.backend.listener.MaintenanceWorkerListener;
 import cn.hhnail.backend.service.FileService;
+import cn.hhnail.backend.service.MaintenanceWorkerService;
 import cn.hhnail.backend.vo.response.AppResponse;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
@@ -29,6 +32,8 @@ public class FileController {
 
     @Autowired
     FileService fileService;
+    @Autowired
+    MaintenanceWorkerService maintenanceWorkerService;
 
     // 本地文件存储路径
     private final String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\";
@@ -170,5 +175,22 @@ public class FileController {
                     .doWrite(list);
         }
 
+    }
+
+
+    /**
+     * 导入
+     */
+    @ApiOperation(value = "导入")
+    @PostMapping("/import")
+    public void importData(@RequestBody MultipartFile file) throws Exception {
+        if (file == null) {
+            throw new RuntimeException("file不得为空");
+        }
+
+        EasyExcel.read(file.getInputStream(),
+                MaintenanceWorker.class,
+                new MaintenanceWorkerListener(maintenanceWorkerService)
+        ).sheet().doRead();
     }
 }
