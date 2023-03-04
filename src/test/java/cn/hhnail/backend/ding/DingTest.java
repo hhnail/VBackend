@@ -11,13 +11,14 @@ import java.net.URLEncoder;
 /**
  * @author Hhnail
  * @version 1.0
- * @description: TODO
+ * @description: 钉钉机器人推送群消息
  * @date 2023/3/4 20:48
  */
 public class DingTest {
 
     public static void main(String[] args) throws Exception {
         Long timestamp = System.currentTimeMillis();
+        // 这个就是上面加签的密钥
         String secret = "SEC3bfefce2aab99f49f19eb5aea95e228776d2aa272dbbe5914d6bfe02c452480a";
         String stringToSign = timestamp + "\n" + secret;
 
@@ -26,12 +27,14 @@ public class DingTest {
         byte[] signData = mac.doFinal(stringToSign.getBytes("UTF-8"));
         String sign = URLEncoder.encode(new String(Base64.encodeBase64(signData)), "UTF-8");
 
+        // 这里就是消息的类型。详见https://open.dingtalk.com/document/orgapp/robot-message-types-and-data-format
         JSONObject json = new JSONObject();
         json.put("msgtype", "text");
         json.put("text", new JSONObject() {{
             put("content", "钉钉官方文档写的好拉！");
         }});
 
+        // 这个就是上面创建机器人webhook后面的token
         String accessToken = "dc7008ac6a594d6713ab428ae4c9dc8ca1813e5735a243f1884233c3d61e0c95";
         String url = "https://oapi.dingtalk.com/robot/send"
                 + "?access_token=" + accessToken
