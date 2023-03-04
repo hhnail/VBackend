@@ -95,10 +95,10 @@ public class StringUtils {
 
     /**
      * 将list的元素按照separator分隔，拼接为字符串
+     *
      * @param list
      * @param separator
-     * @return
-     * eg: [123,aaa] --> "123,aaa"
+     * @return eg: [123,aaa] --> "123,aaa"
      */
     public static String groupConcat(List<String> list, String separator) {
         StringBuffer sb = new StringBuffer();
@@ -109,8 +109,10 @@ public class StringUtils {
         return sb.substring(0, sb.length() - separator.length());
     }
 
+
     /**
      * 将 List<Object> 转化为 List<String>
+     *
      * @param list
      * @return
      */
@@ -120,5 +122,23 @@ public class StringUtils {
             res.add(item.toString());
         });
         return res;
+    }
+
+    /**
+     * 使用placeholder在左边将str补全到length长度
+     * eg：leftComplete(5,"0","123") = "00123"
+     *
+     * @param length
+     * @param placeholder
+     * @param str
+     * @return
+     */
+    public static String leftComplete(Integer length, String placeholder, Object str) {
+        StringBuffer result = new StringBuffer();
+        for (Integer i = 0; i < length - ("" + str).length(); i++) {
+            result.append(placeholder);
+        }
+        result.append(str);
+        return result.toString();
     }
 }
