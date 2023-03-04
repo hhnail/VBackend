@@ -26,8 +26,8 @@ public class RedisController {
 
     @PostMapping("/lock")
     public void lock() throws Exception {
-        // 占分布式锁，去redis占坑
-        // 1. 分布式锁占坑
+
+        // 分布式锁占坑
         Boolean lock = redisTemplate.opsForValue().setIfAbsent(
                 "documentNoLock",
                 "value",
@@ -35,10 +35,10 @@ public class RedisController {
                 TimeUnit.SECONDS
         );
         if (lock) {
-            // 加锁成功...
+            // 加锁成功，执行业务逻辑
             // todo business
             String maxDocumentNo = redisTemplate.opsForValue().get("currentDocumentNo");
-            Thread.sleep(1000);
+            // Thread.sleep(1000);
             if (maxDocumentNo == null || "".equals(maxDocumentNo)) {
                 System.out.println(getAutoDocumentNo(1));
                 redisTemplate.opsForValue().set("currentDocumentNo", "2");
@@ -50,7 +50,8 @@ public class RedisController {
             }
             redisTemplate.delete("documentNoLock");   //删除key，释放锁
         } else {
-            Thread.sleep(100);   // 加锁失败，重试
+            // 加锁失败，重试
+            Thread.sleep(100);
             lock();
         }
     }
