@@ -52,6 +52,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-data-21</artifactId>
+            <version>3.13.6</version>
+        </dependency>
 
         <!--mysql-->
         <dependency>
@@ -233,6 +238,14 @@
             <artifactId>guava-retrying</artifactId>
             <version>2.0.0</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+
 
 
     </dependencies>
