@@ -40,6 +40,7 @@ public class RedisController {
             String maxDocumentNo = redisTemplate.opsForValue().get("currentDocumentNo");
             // Thread.sleep(1000);
             if (maxDocumentNo == null || "".equals(maxDocumentNo)) {
+                // 默认流水号从1开始
                 System.out.println(getAutoDocumentNo(1));
                 redisTemplate.opsForValue().set("currentDocumentNo", "2");
             } else {
