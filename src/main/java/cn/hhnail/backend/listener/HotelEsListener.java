@@ -20,13 +20,13 @@ public class HotelEsListener {
 
 
     // @RabbitListener(queues = MqQueueEnum.HOTEL_INSERT_QUEUE.getCode())
-    @RabbitListener(queues = "${spring.rabbitmq.my-queue.hotel-insert-queue}")
+    // @RabbitListener(queues = "${spring.rabbitmq.my-queue.hotel-insert-queue}") // 能用的。服务没开，监听报错先关掉
     // @RabbitListener(queues = "hotel.insert.queue")
     public void listenerHotelInsertOrUpdate(Long id) {
         hotelService.doHotelInsertOrUpdate4Es(id);
     }
 
-    @RabbitListener(queues = "${spring.rabbitmq.my-queue.hotel-delete-queue}")
+    // @RabbitListener(queues = "${spring.rabbitmq.my-queue.hotel-delete-queue}") // 能用的。服务没开，监听报错先关掉
     // @RabbitListener(queues = "hotel.delete.queue")
     public void listenerHotelDelete(Long id) {
         hotelService.doHotelDelete4Es(id);

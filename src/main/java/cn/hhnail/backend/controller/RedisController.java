@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Hhnail
  * @version 1.0
- * @description: TODO
+ * @description: Redis分布式锁实现特定规则递增流水号
  * @date 2023/3/4 22:05
  */
 @RestController
@@ -37,17 +37,19 @@ public class RedisController {
         if (lock) {
             // 加锁成功，执行业务逻辑
             // todo business
-            String maxDocumentNo = redisTemplate.opsForValue().get("currentDocumentNo");
+            String yyyyMMdd = new SimpleDateFormat("yyyyMMdd").format(new Date());
+            String maxDocumentNo = redisTemplate.opsForValue().get(yyyyMMdd);
             // Thread.sleep(1000);
             if (maxDocumentNo == null || "".equals(maxDocumentNo)) {
                 // 默认流水号从1开始
                 System.out.println(getAutoDocumentNo(1));
-                redisTemplate.opsForValue().set("currentDocumentNo", "2");
+                // 注意服务器时间回拨问题。这个过期时间，他不是一天的秒数来倒计时。而是距离当前一天的时间点。
+                // 所以比如4号设置了一天，就是5号到期，如果把当前时间提前1天改到3号，这个还是5号才过期
+                redisTemplate.opsForValue().set(yyyyMMdd, "2", 1, TimeUnit.DAYS);
             } else {
                 int max = Integer.parseInt(maxDocumentNo);
                 System.out.println(getAutoDocumentNo(max));
-                max++;
-                redisTemplate.opsForValue().set("currentDocumentNo", "" + max);
+                redisTemplate.opsForValue().increment(yyyyMMdd);
             }
             redisTemplate.delete("documentNoLock");   //删除key，释放锁
         } else {
