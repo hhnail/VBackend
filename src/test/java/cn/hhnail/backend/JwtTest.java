@@ -1,4 +1,4 @@
-package cn.hhnail.backend.jwt;
+package cn.hhnail.backend;
 
 import cn.hhnail.backend.enums.FormatePattern;
 import cn.hhnail.backend.util.VStringUtil;

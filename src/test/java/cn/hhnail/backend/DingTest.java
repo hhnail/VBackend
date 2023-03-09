@@ -1,4 +1,4 @@
-package cn.hhnail.backend.ding;
+package cn.hhnail.backend;
 
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
